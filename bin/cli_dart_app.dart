@@ -6,7 +6,8 @@ void main(List<String> arguments) {
   String answer = menu.mainMenu();
   switch(answer) {
     case menu.addItemKey: {
-      stdout.writeln("Adding item...");
+      var addedItem = menu.addItemMenu();
+      stdout.writeln(addedItem);
       break;
     }
     case menu.removeItemKey: {

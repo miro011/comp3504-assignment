@@ -1,4 +1,5 @@
 import 'dart:io';
+import '../menu_objects.dart';
 
 
 const addItemKey    = 'a';
@@ -51,4 +52,10 @@ String mainMenu() {
   var answer = menuPrompt(prompt, validAnswers);
 
   return answer;
+}
+
+
+AddedItem addItemMenu() {
+  var a = AddedItem(10, "Test item", 10);
+  return a;
 }
