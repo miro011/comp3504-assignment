@@ -1,14 +1,17 @@
 name: Lint Code Base
 
-on:
-  pull_request:
-    branches:
-      - '**'
+on: pull_request
+
 jobs:
-  run-lint:
+  build:
+    name: Dart Analyze Linter
     runs-on: ubuntu-latest
+    container:
+      image:  google/dart:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Install dependencies
+        run: dart pub get
       - name: Analyze Dart
-        uses: zgosalvez/github-actions-analyze-dart@v1.7.0
+        uses: zgosalvez/github-actions-analyze-dart@v1
