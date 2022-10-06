@@ -1,5 +1,5 @@
 import 'dart:io';
-import '../menu_objects.dart';
+import '../item.dart';
 
 
 const addItemKey    = 'a';
@@ -55,7 +55,7 @@ String mainMenu() {
 }
 
 
-AddedItem addItemMenu() {
-  var a = AddedItem(10, 'Test item', 10);
+Item addItemMenu() {
+  var a = Item(10, 'Test item', 10);
   return a;
 }

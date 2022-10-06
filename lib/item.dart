@@ -1,11 +1,11 @@
-class AddedItem {
+class Item {
   int id;
   String name;
   int quantity;
   int minQuantity;
   int defaultOrderQuantity;
 
-  AddedItem(
+  Item(
     this.id,
     this.name,
     this.quantity,
