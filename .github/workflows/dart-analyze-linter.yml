@@ -14,4 +14,4 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Run Dart Analyze
-        run: dart analyze ${{ github.workspace }}
+        run: dart analyze ${{ github.action_path }}
