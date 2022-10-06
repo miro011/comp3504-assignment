@@ -16,7 +16,7 @@ class AddedItem {
   );
 
 @override
-toString() {
+String toString() {
     return '{'
       'id: $id, '
       'name: $name, '
