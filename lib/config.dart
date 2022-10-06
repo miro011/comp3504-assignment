@@ -1,0 +1,1 @@
+const csv_separator = ';';
