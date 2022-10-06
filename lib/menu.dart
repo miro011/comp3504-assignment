@@ -17,7 +17,7 @@ String menuPrompt(String menu, List<String> validAnswers) {
     userInput = stdin.readLineSync();
 
     if (userInput == null) {
-      stderr.writeln("Received no input");
+      stderr.writeln('Received no input');
       continue;
     }
     if (userInput.length != 1) {
@@ -31,7 +31,7 @@ String menuPrompt(String menu, List<String> validAnswers) {
       continue;
     }
 
-    stderr.writeln("Received valid user input");
+    stderr.writeln('Received valid user input');
   }
 
   return userInput as String;
@@ -56,6 +56,6 @@ String mainMenu() {
 
 
 AddedItem addItemMenu() {
-  var a = AddedItem(10, "Test item", 10);
+  var a = AddedItem(10, 'Test item', 10);
   return a;
 }
