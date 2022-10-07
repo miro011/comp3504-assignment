@@ -1,4 +1,5 @@
 import 'package:cli_dart_app/item_list.dart';
+import 'package:cli_dart_app/item.dart';
 import 'package:test/test.dart';
 
 
@@ -46,6 +47,20 @@ void main() {
           '3000;Knock Bits;18;12.67;50015\n'
           '3001;Widgets;10;35.50;50004\n'
           '3002;Grommets;20;23.45;50001');
+    });
+  });
+  group('ItemList.getItemById', () {
+    test('Remove existing item', () {
+      ItemList items = generateItemList();
+
+      Item? item = items.getItemById(3000);
+      expect(item, ItemList.itemWordParser('3000;Knock Bits;18;12.67;50015'));
+    });
+    test('Remove non-existing item', () {
+      ItemList items = generateItemList();
+
+      Item? item = items.getItemById(9000);
+      expect(item, null);
     });
   });
 }

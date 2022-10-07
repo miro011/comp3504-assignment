@@ -34,6 +34,17 @@ class ItemList {
   }
 
 
+  Item? getItemById(int id) {
+    for (final item in items) {
+      if (item.id == id) {
+        return item;
+      }
+    }
+
+    return null;
+  }
+
+
   String toFileContents() {
     List<String> contentLines = [];
 
