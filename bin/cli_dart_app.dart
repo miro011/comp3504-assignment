@@ -4,7 +4,7 @@ import 'package:cli_dart_app/item.dart';
 import 'package:cli_dart_app/menu.dart' as menu;
 import 'package:cli_dart_app/supplier_list.dart';
 import 'package:cli_dart_app/resources.dart' as resources;
-import 'package:cli_dart_app/itemList.dart';
+import 'package:cli_dart_app/item_list.dart';
 
 void main(List<String> arguments) {
   //Creates a ItemList of Item objects from resource config files
