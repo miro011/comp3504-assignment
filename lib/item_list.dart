@@ -1,5 +1,3 @@
-//import 'dart:js_util';
-
 import 'package:cli_dart_app/item.dart';
 import 'package:cli_dart_app/resources.dart' as resources;
 
@@ -12,11 +10,11 @@ class ItemList {
     var rawLines = resources.readAsLines(path);
 
     for (final line in rawLines) {
-      items.add(itemWordParser(line));
+      items.add(ItemList.itemWordParser(line));
     }
   }
 
-  Item itemWordParser(String singleLine) {
+  static Item itemWordParser(String singleLine) {
     List words = [];
     words = singleLine.split(";");
 
@@ -33,5 +31,17 @@ class ItemList {
 
   getItem(int i) {
     return items[i];
+  }
+
+
+  String toFileContents() {
+    List<String> contentLines = [];
+
+    for (final item in items) {
+      contentLines.add(item.toFileContents());
+    }
+
+    String contents = contentLines.join('\n');
+    return contents;
   }
 }
