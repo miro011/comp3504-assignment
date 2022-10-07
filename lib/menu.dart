@@ -16,16 +16,14 @@ String menuPrompt(String menu, List<String> validAnswers) {
     userInput = stdin.readLineSync();
 
     if (userInput == null) {
-      stderr.writeln('Received no input');
+      stderr.writeln('STDIN was closed while we were waiting for input');
       continue;
     }
 
     if (!validAnswers.contains(userInput)) {
-      stderr.writeAll(["Received invalid user input: '", userInput, "'\n"]);
+      stderr.writeln('Invalid input');
       continue;
     }
-
-    stderr.writeln('Received valid user input');
   }
 
   return userInput as String;
