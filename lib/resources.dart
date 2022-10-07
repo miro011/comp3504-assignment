@@ -45,3 +45,15 @@ List<String> readAsLines(String resourceName) {
 
   return contents;
 }
+
+
+void saveResourceWithBackupOnClobber(var data, String resourceName) {
+  findResourcesDir();
+
+  File output = File(path.join(resourcesPath as String, resourceName));
+  if (output.existsSync()) {
+    output.renameSync(path.join(resourcesPath as String, resourceName + '.bak'));
+  }
+
+  output.writeAsStringSync(data.toFileContents());
+}
