@@ -7,7 +7,7 @@ const removeItemKey = 'r';
 const searchItemKey = 's';
 const quitItemKey = 'q';
 
-String menuPrompt(String menu, var validAnswers) {
+String menuPrompt(String menu, dynamic validAnswers) {
   String? userInput;
 
   stdout.writeln(menu);
