@@ -32,4 +32,16 @@ class ItemList {
   getItem(int i) {
     return items[i];
   }
+
+
+  String toFileContents() {
+    List<String> contentLines = [];
+
+    for (final item in items) {
+      contentLines.add(item.toFileContents());
+    }
+
+    String contents = contentLines.join('\n');
+    return contents;
+  }
 }
