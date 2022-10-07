@@ -12,7 +12,7 @@ void main(List<String> arguments) {
 
   //print(items.getItem(1).name);
 
-  //Creates a SupplierList of Supplioer objects from resource config files
+  //Creates a SupplierList of Supplier objects from resource config files
   SupplierList suppliers =
       SupplierList.fromResource(config.suppliers_resource_name);
 
