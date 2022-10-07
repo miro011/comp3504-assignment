@@ -29,4 +29,23 @@ void main() {
       expect(s.getIds(), [3000, 3001, 3002]);
     });
   });
+  group('ItemList.remove', () {
+    test('Remove valid item', () {
+      ItemList items = generateItemList();
+
+      items.remove(3000);
+      expect(items.toFileContents(),
+          '3001;Widgets;10;35.50;50004\n'
+          '3002;Grommets;20;23.45;50001');
+    });
+    test('Remove invalid item', () {
+      ItemList items = generateItemList();
+
+      items.remove(9000);
+      expect(items.toFileContents(),
+          '3000;Knock Bits;18;12.67;50015\n'
+          '3001;Widgets;10;35.50;50004\n'
+          '3002;Grommets;20;23.45;50001');
+    });
+  });
 }

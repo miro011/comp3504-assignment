@@ -55,4 +55,9 @@ class ItemList {
 
     return ids;
   }
+
+
+  void remove(id) {
+    items.retainWhere((item) => item.id != id);
+  }
 }
