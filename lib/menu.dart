@@ -53,6 +53,15 @@ Item addItemMenu(ItemList items) {
   return a;
 }
 
-void removeItemMenu() {
-  const validAnswers =
+
+void removeItemMenu(ItemList items) {
+  List<String> validAnswers = [];
+  const prompt = 'Item ID';
+
+  items.getIds().forEach((id) {
+     validAnswers.add(id.toString());
+  });
+
+  String answer = menuPrompt(prompt, validAnswers);
+  items.remove(int.parse(answer));
 }

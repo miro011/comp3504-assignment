@@ -30,7 +30,7 @@ void main(List<String> arguments) {
           }
         case menu.removeItemKey:
           {
-            stdout.writeln('Removing item...');
+            menu.removeItemMenu(items);
             break;
           }
         case menu.searchItemKey:
