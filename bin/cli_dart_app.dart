@@ -24,13 +24,13 @@ void main(List<String> arguments) {
       switch (answer) {
         case menu.addItemKey:
           {
-            var addedItem = menu.addItemMenu();
+            var addedItem = menu.addItemMenu(items);
             stdout.writeln(addedItem);
             break;
           }
         case menu.removeItemKey:
           {
-            stdout.writeln('Removing item...');
+            menu.removeItemMenu(items);
             break;
           }
         case menu.searchItemKey:

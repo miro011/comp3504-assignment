@@ -1,6 +1,5 @@
 import 'package:cli_dart_app/config.dart' as config;
 
-
 class Item {
   int id;
   String name;
@@ -34,4 +33,21 @@ class Item {
     ];
     return strArr.join(config.csv_separator);
   }
+
+  @override
+  // Had to implement this as the default one checks if two objects reference
+  // the same thing in memory, not if their attributes are equal.
+  bool operator ==(var other) {
+    return (other is Item &&
+        other.id == id &&
+        other.name == name &&
+        other.quantity == quantity &&
+        other.price == price &&
+        other.supplierId == supplierId &&
+        other.minQuantity == minQuantity &&
+        other.defaultOrderQuantity == defaultOrderQuantity);
+  }
+
+  @override
+  int get hashCode => super.hashCode;
 }

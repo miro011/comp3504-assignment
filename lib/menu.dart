@@ -1,5 +1,6 @@
 import 'dart:io';
-import '../item.dart';
+import 'package:cli_dart_app/item.dart';
+import 'package:cli_dart_app/item_list.dart';
 
 const addItemKey = 'a';
 const removeItemKey = 'r';
@@ -15,22 +16,14 @@ String menuPrompt(String menu, List<String> validAnswers) {
     userInput = stdin.readLineSync();
 
     if (userInput == null) {
-      stderr.writeln('Received no input');
+      stdout.writeln('STDIN was closed while we were waiting for input');
       continue;
     }
-    if (userInput.length != 1) {
-      stderr.writeAll(
-          ["Received too much or too little input, '", userInput, "'\n"]);
-      continue;
-    }
-    userInput = userInput.substring(0, 1);
 
     if (!validAnswers.contains(userInput)) {
-      stderr.writeAll(["Received invalid user input: '", userInput, "'\n"]);
+      stdout.writeln('Invalid input');
       continue;
     }
-
-    stderr.writeln('Received valid user input');
   }
 
   return userInput as String;
@@ -48,7 +41,43 @@ String mainMenu() {
   return answer;
 }
 
-Item addItemMenu() {
+Item addItemMenu(ItemList items) {
   var a = Item(10, 'Test item', 10, 10, 10);
   return a;
+}
+
+void removeItemMenu(ItemList items) {
+  List<String> validAnswers = [];
+  String answer;
+  int id;
+  int quantity;
+  Item? item;
+
+  items.getIds().forEach((id) {
+    validAnswers.add(id.toString());
+  });
+
+  answer = menuPrompt('Item ID', validAnswers);
+  id = int.parse(answer);
+
+  item = items.getItemById(id);
+  if (item == null) {
+    stderr.writeln('User somehow entered an incorrect item ID (menuPrompt '
+        'should have prevented this). Ignoring error.');
+    return;
+  }
+
+  validAnswers = [];
+  for (int i = 0; i < item.quantity; i++) {
+    validAnswers.add(i.toString());
+  }
+  validAnswers.add(''); // empty string means remove all
+
+  answer = menuPrompt('Quantity to remove out of ${item.quantity} (all)', validAnswers);
+  if (answer == '') {
+    items.remove(id);
+  } else {
+    quantity = int.parse(answer);
+    items.remove(id, quantity);
+  }
 }

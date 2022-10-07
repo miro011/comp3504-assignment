@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:cli_dart_app/config.dart' as config;
 import 'package:path/path.dart' as path;
 
-
 String? resourcesPath;
-
 
 void findResourcesDir() {
   Directory? resourcesDir;
@@ -24,7 +22,6 @@ void findResourcesDir() {
   }
 }
 
-
 String readAsString(String resourceName) {
   findResourcesDir();
 
@@ -34,7 +31,6 @@ String readAsString(String resourceName) {
 
   return contents;
 }
-
 
 List<String> readAsLines(String resourceName) {
   findResourcesDir();
@@ -46,13 +42,13 @@ List<String> readAsLines(String resourceName) {
   return contents;
 }
 
-
 void saveResourceWithBackupOnClobber(var data, String resourceName) {
   findResourcesDir();
 
   File output = File(path.join(resourcesPath as String, resourceName));
   if (output.existsSync()) {
-    output.renameSync(path.join(resourcesPath as String, resourceName + '.bak'));
+    output
+        .renameSync(path.join(resourcesPath as String, resourceName + '.bak'));
   }
 
   output.writeAsStringSync(data.toFileContents());

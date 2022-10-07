@@ -1,5 +1,6 @@
 import 'package:cli_dart_app/item.dart';
 import 'package:cli_dart_app/resources.dart' as resources;
+import 'dart:math';
 
 class ItemList {
   List<Item> items = [];
@@ -33,6 +34,15 @@ class ItemList {
     return items[i];
   }
 
+  Item? getItemById(int id) {
+    for (final item in items) {
+      if (item.id == id) {
+        return item;
+      }
+    }
+
+    return null;
+  }
 
   String toFileContents() {
     List<String> contentLines = [];
@@ -43,5 +53,28 @@ class ItemList {
 
     String contents = contentLines.join('\n');
     return contents;
+  }
+
+  List<int> getIds() {
+    List<int> ids = [];
+
+    for (final item in items) {
+      ids.add(item.id);
+    }
+
+    return ids;
+  }
+
+  void remove(id, [quantity]) {
+    if (quantity == null) {
+      items.retainWhere((item) => item.id != id);
+    } else if (quantity <= 0) {
+      throw ArgumentError("Can't remove 0 or a negative number of an item");
+    } else {
+      Item? item = getItemById(id);
+      if (item != null) {
+        item.quantity -= min(item.quantity, quantity);
+      }
+    }
   }
 }
