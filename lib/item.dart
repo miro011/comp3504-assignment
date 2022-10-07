@@ -1,3 +1,6 @@
+import 'package:cli_dart_app/config.dart' as config;
+
+
 class Item {
   int id;
   String name;
@@ -19,5 +22,16 @@ class Item {
         'supplier ID: $supplierId, '
         'quantity: $quantity'
         '}';
+  }
+
+  String toFileContents() {
+    List<String> strArr = [
+      id.toString(),
+      name,
+      quantity.toString(),
+      price.toStringAsFixed(2),
+      supplierId.toString()
+    ];
+    return strArr.join(config.csv_separator);
   }
 }
