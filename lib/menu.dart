@@ -23,7 +23,6 @@ String menuPrompt(String menu, List<String> validAnswers) {
           ["Received too much or too little input, '", userInput, "'\n"]);
       continue;
     }
-    userInput = userInput.substring(0, 1);
 
     if (!validAnswers.contains(userInput)) {
       stderr.writeAll(["Received invalid user input: '", userInput, "'\n"]);
