@@ -29,7 +29,7 @@ String menuPrompt(String menu, dynamic validAnswers) {
     }
     else {
       stderr.writeln('Menu prompt called using unsupported "ValidAnswers" type');
-      return;
+      return "";
     }
 
     stderr.writeln('Invalid input');
