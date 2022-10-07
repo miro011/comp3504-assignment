@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:cli_dart_app/config.dart' as config;
 import 'package:cli_dart_app/item.dart';
 import 'package:cli_dart_app/menu.dart' as menu;
 import 'dart:convert';
+import 'package:cli_dart_app/supplier_list.dart';
 
 void main(List<String> arguments) {
   //itemFile path
@@ -25,6 +27,8 @@ void main(List<String> arguments) {
     print(anItem);
     //create item from each line in the array
     //put items into itemList
+
+    SupplierList suppliers = SupplierList.fromFile(config.suppliers_file_path);
 
     //provide action menu
     String answer = menu.mainMenu();
