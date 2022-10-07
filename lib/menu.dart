@@ -7,11 +7,11 @@ const removeItemKey = 'r';
 const searchItemKey = 's';
 const quitItemKey = 'q';
 
-String menuPrompt(String menu, List<String> validAnswers) {
+String menuPrompt(String menu, var validAnswers) {
   String? userInput;
 
   stdout.writeln(menu);
-  while (!validAnswers.contains(userInput)) {
+  while (1==1) {
     stdout.write('Answer: ');
     userInput = stdin.readLineSync();
 
@@ -20,14 +20,24 @@ String menuPrompt(String menu, List<String> validAnswers) {
       continue;
     }
 
-    if (!validAnswers.contains(userInput)) {
-      stdout.writeln('Invalid input');
-      continue;
+    // runtimeType returns  the type of a variable
+    if ("${validAnswers.runtimeType}" == "List<String>") {
+      if (validAnswers.contains(userInput)) break;
     }
+    else if ("${validAnswers.runtimeType}" == "_RegExp") {
+      if (validAnswers.hasMatch(userInput)) break;
+    }
+    else {
+      stderr.writeln('Menu prompt called using unsupported "ValidAnswers" type');
+      exit(0);
+    }
+
+    stderr.writeln('Invalid input');
   }
 
   return userInput as String;
 }
+
 
 String mainMenu() {
   const validAnswers = [addItemKey, removeItemKey, searchItemKey, quitItemKey];
