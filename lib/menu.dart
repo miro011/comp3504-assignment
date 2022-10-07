@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cli_dart_app/item.dart';
+import 'package:cli_dart_app/item_list.dart';
 
 const addItemKey = 'a';
 const removeItemKey = 'r';
@@ -47,7 +48,7 @@ String mainMenu() {
   return answer;
 }
 
-Item addItemMenu() {
+Item addItemMenu(ItemList items) {
   var a = Item(10, 'Test item', 10, 10, 10);
   return a;
 }

@@ -24,7 +24,7 @@ void main(List<String> arguments) {
       switch (answer) {
         case menu.addItemKey:
           {
-            var addedItem = menu.addItemMenu();
+            var addedItem = menu.addItemMenu(items);
             stdout.writeln(addedItem);
             break;
           }
