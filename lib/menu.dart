@@ -48,12 +48,36 @@ Item addItemMenu(ItemList items) {
 
 void removeItemMenu(ItemList items) {
   List<String> validAnswers = [];
-  const prompt = 'Item ID';
+  String answer;
+  int id;
+  int quantity;
+  Item? item;
 
   items.getIds().forEach((id) {
-     validAnswers.add(id.toString());
+    validAnswers.add(id.toString());
   });
 
-  String answer = menuPrompt(prompt, validAnswers);
-  items.remove(int.parse(answer));
+  answer = menuPrompt('Item ID', validAnswers);
+  id = int.parse(answer);
+
+  item = items.getItemById(id);
+  if (item == null) {
+    stderr.writeln('User somehow entered an incorrect item ID (menuPrompt '
+        'should have prevented this). Ignoring error.');
+    return;
+  }
+
+  validAnswers = [];
+  for (int i = 0; i < item.quantity; i++) {
+    validAnswers.add(i.toString());
+  }
+  validAnswers.add(''); // empty string means remove all
+
+  answer = menuPrompt('Quantity to remove out of ${item.quantity} (all)', validAnswers);
+  if (answer == '') {
+    items.remove(id);
+  } else {
+    quantity = int.parse(answer);
+    items.remove(id, quantity);
+  }
 }
