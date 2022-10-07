@@ -1,2 +1,3 @@
 const csv_separator = ';';
-const suppliers_file_path = 'resources/suppliers.txt';const resources_dirs = ['resources', '../resources'];
+const suppliers_resource_name = 'suppliers.txt';
+const resources_dirs = ['resources', '../resources'];
