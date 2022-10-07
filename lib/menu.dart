@@ -1,5 +1,5 @@
 import 'dart:io';
-import '../item.dart';
+import 'package:cli_dart_app/item.dart';
 
 const addItemKey = 'a';
 const removeItemKey = 'r';
