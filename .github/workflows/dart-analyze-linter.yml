@@ -3,7 +3,7 @@ name: Lint Code Base
 on: pull_request
 
 jobs:
-  build:
+  lint:
     name: Dart Analyze Linter
     runs-on: ubuntu-latest
     container:
