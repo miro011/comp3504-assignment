@@ -52,3 +52,7 @@ Item addItemMenu() {
   var a = Item(10, 'Test item', 10, 10, 10);
   return a;
 }
+
+void removeItemMenu() {
+  const validAnswers =
+}

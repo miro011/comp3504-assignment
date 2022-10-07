@@ -44,4 +44,15 @@ class ItemList {
     String contents = contentLines.join('\n');
     return contents;
   }
+
+
+  List<int> getIds() {
+    List<int> ids = [];
+
+    for (final item in items) {
+      ids.add(item.id);
+    }
+
+    return ids;
+  }
 }
