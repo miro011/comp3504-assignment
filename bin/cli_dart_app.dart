@@ -35,7 +35,7 @@ void main(List<String> arguments) {
           }
         case menu.searchItemKey:
           {
-            stdout.writeln('Searching for item...');
+            menu.searchItemsMenu(items);
             break;
           }
         case menu.quitItemKey:
