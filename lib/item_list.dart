@@ -34,7 +34,6 @@ class ItemList {
     return items[i];
   }
 
-
   Item? getItemById(int id) {
     for (final item in items) {
       if (item.id == id) {
@@ -44,7 +43,6 @@ class ItemList {
 
     return null;
   }
-
 
   String toFileContents() {
     List<String> contentLines = [];
@@ -56,7 +54,6 @@ class ItemList {
     String contents = contentLines.join('\n');
     return contents;
   }
-
 
   List<int> getIds() {
     List<int> ids = [];

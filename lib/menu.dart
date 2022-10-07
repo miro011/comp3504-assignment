@@ -53,7 +53,6 @@ Item addItemMenu(ItemList items) {
   return a;
 }
 
-
 void removeItemMenu(ItemList items) {
   List<String> validAnswers = [];
   const prompt = 'Item ID';
