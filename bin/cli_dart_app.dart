@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:cli_dart_app/config.dart' as config;
-import 'package:cli_dart_app/item.dart';
 import 'package:cli_dart_app/menu.dart' as menu;
 import 'package:cli_dart_app/supplier_list.dart';
 import 'package:cli_dart_app/resources.dart' as resources;
