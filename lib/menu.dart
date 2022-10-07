@@ -16,12 +16,12 @@ String menuPrompt(String menu, List<String> validAnswers) {
     userInput = stdin.readLineSync();
 
     if (userInput == null) {
-      stderr.writeln('STDIN was closed while we were waiting for input');
+      stdout.writeln('STDIN was closed while we were waiting for input');
       continue;
     }
 
     if (!validAnswers.contains(userInput)) {
-      stderr.writeln('Invalid input');
+      stdout.writeln('Invalid input');
       continue;
     }
   }
