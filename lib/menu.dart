@@ -91,3 +91,33 @@ void removeItemMenu(ItemList items) {
     items.remove(id, quantity);
   }
 }
+
+void searchItemsMenu(ItemList items) {
+  // Get user inputs
+  String searchTypeUserInput = menuPrompt("\nSEARCH FOR:\nn: Name\ni: ID\nb: Back\n", RegExp(r"^n|i|b$"));
+
+  String searchTextUserInput = "";
+  if (searchTypeUserInput == "b") {
+    return;
+  }
+  else if (searchTypeUserInput == "n") {
+    searchTextUserInput = menuPrompt("\nENTER FULL OR PARTIAL ITEM NAME:\n", RegExp(r"^[a-zA-Z]+$"));
+    searchTextUserInput = searchTextUserInput.toLowerCase();
+  }
+  else if (searchTypeUserInput == "i") {
+    searchTextUserInput = menuPrompt("\nENTER FULL OR PARTIAL ITEM ID:\n", RegExp(r"^[0-9]+$"));
+  }
+
+  // Find and display matched items
+  for(var itemObj in items.items) {
+    if (
+        (searchTypeUserInput == "n" && itemObj.name.toLowerCase().contains(searchTextUserInput)) ||
+        (searchTypeUserInput == "i" && itemObj.id.toString().contains(searchTextUserInput))
+    )
+    {
+      print("-------------------------------------");
+      print(itemObj.toString());
+      print("-------------------------------------");
+    }
+  }
+}
