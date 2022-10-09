@@ -30,8 +30,12 @@ class ItemList {
     return anItem;
   }
 
-  getItem(int i) {
+  getItemByIndex(int i) {
     return items[i];
+  }
+
+  getLength() {
+    return items.length;
   }
 
   Item? getItemById(int id) {
@@ -63,6 +67,16 @@ class ItemList {
     }
 
     return ids;
+  }
+
+  //add item. Automatically generates item ID
+  void addItem(name, quantity, price, supplierID) {
+    //set ID of new item to ID of the last item + 1
+    int itemId = items.last.id + 1;
+
+    var newItem = Item(itemId, name, price, supplierID, quantity);
+
+    items.add(newItem);
   }
 
   void remove(id, [quantity]) {
