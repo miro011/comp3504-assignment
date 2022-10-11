@@ -21,6 +21,8 @@ String menuPrompt(String menu, dynamic validAnswers) {
       continue;
     }
 
+    userInput = userInput.trim();
+
     // runtimeType returns  the type of a variable
     if ("${validAnswers.runtimeType}" == "List<String>") {
       if (validAnswers.contains(userInput)) break;
