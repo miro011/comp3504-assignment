@@ -28,4 +28,14 @@ class SupplierList {
       suppliers.add(Supplier.fromString(line));
     }
   }
+
+  List<int> getSupplierIds() {
+    List<int> ids = [];
+
+    for (final supplier in suppliers) {
+      ids.add(supplier.id);
+    }
+
+    return ids;
+  }
 }

@@ -9,8 +9,6 @@ void main(List<String> arguments) {
   //Creates a ItemList of Item objects from resource config files
   ItemList items = ItemList.addResourceItems(config.items_resource_name);
 
-  //print(items.getItem(1).name);
-
   //Creates a SupplierList of Supplier objects from resource config files
   SupplierList suppliers =
       SupplierList.fromResource(config.suppliers_resource_name);
@@ -24,8 +22,7 @@ void main(List<String> arguments) {
       switch (answer) {
         case menu.addItemKey:
           {
-            var addedItem = menu.addItemMenu(items);
-            stdout.writeln(addedItem);
+            menu.addItemMenu(items, suppliers);
             break;
           }
         case menu.removeItemKey:
