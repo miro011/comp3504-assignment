@@ -127,7 +127,7 @@ void searchItemsMenu(ItemList items) {
     return;
   } else if (searchTypeUserInput == "n") {
     searchTextUserInput = menuPrompt(
-        "\nENTER FULL OR PARTIAL ITEM NAME:\n", RegExp(r"^[a-zA-Z]+$"));
+        "\nENTER FULL OR PARTIAL ITEM NAME:\n", RegExp(r"^[a-zA-Z ]+$"));
     searchTextUserInput = searchTextUserInput.toLowerCase();
   } else if (searchTypeUserInput == "i") {
     searchTextUserInput =
