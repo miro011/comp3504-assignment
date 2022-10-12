@@ -82,7 +82,7 @@ class ItemList {
   void remove(id, [quantity]) {
     if (quantity == null) {
       items.retainWhere((item) => item.id != id);
-    } else if (quantity <= 0) {
+    } else if (quantity < 0) {
       throw ArgumentError("Can't remove 0 or a negative number of an item");
     } else {
       Item? item = getItemById(id);
