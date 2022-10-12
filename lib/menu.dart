@@ -110,7 +110,7 @@ void removeItemMenu(ItemList items) {
   answer = menuPrompt(
       'Quantity to remove out of ${item.quantity} (all)', validAnswers);
   if (answer == '') {
-    items.remove(id);
+    items.remove(id, item.quantity);
   } else {
     quantity = int.parse(answer);
     items.remove(id, quantity);
