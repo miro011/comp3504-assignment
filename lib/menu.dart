@@ -68,7 +68,7 @@ void removeItemMenu(ItemList items) {
   }
 
   validAnswers = [];
-  for (int i = 0; i < item.quantity; i++) {
+  for (int i = 0; i <= item.quantity; i++) {
     validAnswers.add(i.toString());
   }
   validAnswers.add(''); // empty string means remove all
