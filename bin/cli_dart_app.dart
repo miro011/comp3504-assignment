@@ -13,6 +13,9 @@ void main(List<String> arguments) {
   SupplierList suppliers =
       SupplierList.fromResource(config.suppliers_resource_name);
 
+  // Holds the file for the orders
+  File ordersFile = File(config.orders_resource_path);
+
   //provide action menu
   bool running = true;
 
@@ -23,11 +26,13 @@ void main(List<String> arguments) {
         case menu.addItemKey:
           {
             menu.addItemMenu(items, suppliers);
+            placeAutoOrder(items, ordersFile);
             break;
           }
         case menu.removeItemKey:
           {
             menu.removeItemMenu(items);
+            placeAutoOrder(items, ordersFile);
             break;
           }
         case menu.searchItemKey:
@@ -53,5 +58,17 @@ void main(List<String> arguments) {
   } finally {
     resources.saveResourceWithBackupOnClobber(
         items, config.items_resource_name);
+  }
+}
+
+void placeAutoOrder(ItemList items, File ordersFile) {
+  for (var itemObj in items.items) {
+    if (itemObj.quantity < itemObj.minQuantity) {
+      int numOrdered = itemObj.defaultOrderQuantity - itemObj.quantity;
+      itemObj.quantity = numOrdered;
+      String orderMsg = "Item: ${itemObj.name}\nOty ordered: $numOrdered\n\n";
+      ordersFile.writeAsStringSync(orderMsg, mode: FileMode.append);
+      stdout.writeln("\n*** Auto-order placed for ${itemObj.name} ***\n");
+    }
   }
 }
