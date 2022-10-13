@@ -57,7 +57,7 @@ class Aoh {
         double cost = itemObj.price * numOrdered;
         this.totalCost += cost;
 
-        itemObj.quantity = numOrdered;
+        itemObj.quantity = itemObj.quantity + numOrdered;
 
         String orderMsg = "ORDER ID.: ${this.lastOrderId}\n";
         orderMsg += "Date ordered: ${this.date}\n\n";
