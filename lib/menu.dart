@@ -110,7 +110,7 @@ void removeItemMenu(ItemList items) {
   answer = menuPrompt(
       'Quantity to remove out of ${item.quantity} (all)', validAnswers);
   if (answer == '') {
-    items.remove(id);
+    items.remove(id, item.quantity);
   } else {
     quantity = int.parse(answer);
     items.remove(id, quantity);
@@ -127,7 +127,7 @@ void searchItemsMenu(ItemList items) {
     return;
   } else if (searchTypeUserInput == "n") {
     searchTextUserInput = menuPrompt(
-        "\nENTER FULL OR PARTIAL ITEM NAME:\n", RegExp(r"^[a-zA-Z]+$"));
+        "\nENTER FULL OR PARTIAL ITEM NAME:\n", RegExp(r"^[a-zA-Z ]+$"));
     searchTextUserInput = searchTextUserInput.toLowerCase();
   } else if (searchTypeUserInput == "i") {
     searchTextUserInput =
