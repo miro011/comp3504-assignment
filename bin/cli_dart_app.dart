@@ -36,6 +36,12 @@ void main(List<String> arguments) {
             aoh.run();
             break;
           }
+        case menu.changeItemKey:
+          {
+            menu.changeItemQtyMenu(items);
+            aoh.run();
+            break;
+          }
         case menu.searchItemKey:
           {
             menu.searchItemsMenu(items);

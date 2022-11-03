@@ -79,16 +79,15 @@ class ItemList {
     items.add(newItem);
   }
 
-  void remove(id, [quantity]) {
-    if (quantity == null) {
-      items.retainWhere((item) => item.id != id);
-    } else if (quantity < 0) {
-      throw ArgumentError("Can't remove 0 or a negative number of an item");
-    } else {
-      Item? item = getItemById(id);
-      if (item != null) {
-        item.quantity -= min(item.quantity, quantity);
-      }
+  void changeItemQty(id, int quantity) {
+    Item? item = getItemById(id);
+
+    if (item != null) {
+      item.quantity += quantity;
     }
+  }
+
+  void remove(id) {
+    items.retainWhere((item) => item.id != id);
   }
 }

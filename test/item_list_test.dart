@@ -30,7 +30,7 @@ void main() {
     });
   });
   group('ItemList.remove', () {
-    test('Remove all of valid item', () {
+    test('Remove valid item', () {
       ItemList items = generateItemList();
 
       items.remove(3000);
@@ -39,47 +39,63 @@ void main() {
           '3001;Widgets;10;35.50;50004\n'
           '3002;Grommets;20;23.45;50001');
     });
-    test('Remove all of invalid item', () {
+  });
+  group('ItemList.changeItemQty', () {
+    test('Add qty of valid item', () {
       ItemList items = generateItemList();
 
-      items.remove(9000);
+      items.changeItemQty(3000, 18);
+      expect(
+          items.toFileContents(),
+          '3000;Knock Bits;36;12.67;50015\n'
+          '3001;Widgets;10;35.50;50004\n'
+          '3002;Grommets;20;23.45;50001');
+    });
+    test('Remove some of an invalid item', () {
+      ItemList items = generateItemList();
+
+      items.changeItemQty(9000, 18);
       expect(
           items.toFileContents(),
           '3000;Knock Bits;18;12.67;50015\n'
+          '3001;Widgets;10;35.50;50004\n'
+          '3002;Grommets;20;23.45;50001');
+    });
+    test('Remove all of valid item', () {
+      ItemList items = generateItemList();
+
+      items.changeItemQty(3000, -18);
+      expect(
+          items.toFileContents(),
+          '3000;Knock Bits;0;12.67;50015\n'
+          '3001;Widgets;10;35.50;50004\n'
+          '3002;Grommets;20;23.45;50001');
+    });
+    test('Remove to negative of valid item', () {
+      ItemList items = generateItemList();
+
+      items.changeItemQty(3000, -20);
+      expect(
+          items.toFileContents(),
+          '3000;Knock Bits;-2;12.67;50015\n'
           '3001;Widgets;10;35.50;50004\n'
           '3002;Grommets;20;23.45;50001');
     });
     test('Remove some of of valid item', () {
       ItemList items = generateItemList();
 
-      items.remove(3000, 10);
+      items.changeItemQty(3000, -10);
       expect(
           items.toFileContents(),
           '3000;Knock Bits;8;12.67;50015\n'
           '3001;Widgets;10;35.50;50004\n'
           '3002;Grommets;20;23.45;50001');
     });
-    test('Remove some of of invalid item', () {
-      ItemList items = generateItemList();
-
-      items.remove(9000, 10);
-      expect(
-          items.toFileContents(),
-          '3000;Knock Bits;18;12.67;50015\n'
-          '3001;Widgets;10;35.50;50004\n'
-          '3002;Grommets;20;23.45;50001');
-    });
     test('Remove a negative amount of an invalid item', () {
       ItemList items = generateItemList();
 
-      items.remove(9000, -10);
+      items.changeItemQty(9000, -10);
       expect(() => items.toFileContents(), throwsA(isArgumentError));
-    }, skip: true); // couldn't figure out how to test this throws an exception
-    test('Remove a negative amount of a valid item', () {
-      ItemList items = generateItemList();
-
-      items.remove(3000, -10);
-      expect(() => items.toFileContents(), throwsArgumentError);
     }, skip: true); // couldn't figure out how to test this throws an exception
   });
   group('ItemList.getItemById', () {
