@@ -34,7 +34,7 @@ String menuPrompt(String menu, dynamic validAnswers) {
       return "";
     }
 
-    stderr.writeln('Invalid input');
+    stdout.writeln('Invalid input');
   }
 
   return userInput as String;
