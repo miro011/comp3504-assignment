@@ -1,13 +1,16 @@
 import flask
-
+from flask import jsonify, request
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/', methods=['GET'])
+@app.route('/hello', methods=['GET'])
 def home():
-    return "<h1><p>Hello World</p></h1>"
+
+    if (request.method == 'GET'):
+        data = {"data": "Hello World"}
+        return jsonify(data)
 
 
 if __name__ == '__main__':
