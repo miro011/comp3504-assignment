@@ -1,0 +1,33 @@
+
+DROP DATABASE IF EXISTS 3504asg02;
+CREATE DATABASE 3504asg02;
+USE 3504asg02;
+
+#DROP TABLE IF EXISTS items, supplier, orders;
+CREATE TABLE items(
+    itemID int,
+    itemName varchar(255),
+    quantity int,
+    price float,
+    supplierID int
+);
+
+CREATE TABLE supplier(
+    supplierID int,
+    suppliername varchar(255),
+    street varchar(255),
+    quadrant varchar(255),
+    city varchar(255),
+    name varchar(255)
+);
+
+CREATE TABLE orders(
+    orderID int,
+    orderDate date,
+    itemName varchar(255),
+    quantity int,
+    suppliername varchar(255),
+    cost float
+);
+
+
