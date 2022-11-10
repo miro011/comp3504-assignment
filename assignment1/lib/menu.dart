@@ -5,6 +5,7 @@ import 'package:cli_dart_app/supplier_list.dart';
 
 const addItemKey = 'a';
 const removeItemKey = 'r';
+const changeItemKey = 'c';
 const searchItemKey = 's';
 const quitItemKey = 'q';
 
@@ -34,16 +35,17 @@ String menuPrompt(String menu, dynamic validAnswers) {
       return "";
     }
 
-    stderr.writeln('Invalid input');
+    stdout.writeln('Invalid input');
   }
 
   return userInput as String;
 }
 
 String mainMenu() {
-  const validAnswers = [addItemKey, removeItemKey, searchItemKey, quitItemKey];
-  const prompt = 'a: Add item\n'
+  const validAnswers = [addItemKey, removeItemKey, changeItemKey, searchItemKey, quitItemKey];
+  const prompt = 'a: Add new item\n'
       'r: Remove item\n'
+      'c: Change qty of item\n'
       's: Search for item\n'
       'q: Quit\n';
 
@@ -101,20 +103,39 @@ void removeItemMenu(ItemList items) {
     return;
   }
 
-  validAnswers = [];
-  for (int i = 0; i <= item.quantity; i++) {
-    validAnswers.add(i.toString());
+  items.remove(id);
+}
+
+void changeItemQtyMenu(ItemList items) {
+  List<String> validAnswers = [];
+  String answer;
+  int id;
+  int quantity;
+  Item? item;
+
+  items.getIds().forEach((id) {
+    validAnswers.add(id.toString());
+  });
+
+  answer = menuPrompt('Item ID', validAnswers);
+  id = int.parse(answer);
+
+  item = items.getItemById(id);
+  if (item == null) {
+    stderr.writeln('User somehow entered an incorrect item ID (menuPrompt '
+        'should have prevented this). Ignoring error.');
+    return;
   }
-  validAnswers.add(''); // empty string means remove all
+
+  RegExp validAnswersRegexp = RegExp(r"-?[0-9]+");
 
   answer = menuPrompt(
-      'Quantity to remove out of ${item.quantity} (all)', validAnswers);
-  if (answer == '') {
-    items.remove(id, item.quantity);
-  } else {
-    quantity = int.parse(answer);
-    items.remove(id, quantity);
-  }
+    'Quantity to add/remove for item (negative numbers remove items)',
+    validAnswersRegexp
+  );
+
+  quantity = int.parse(answer);
+  items.changeItemQty(id, quantity);
 }
 
 void searchItemsMenu(ItemList items) {
