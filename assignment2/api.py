@@ -3,8 +3,8 @@
 # pip install dotenv
 
 # HELPFUL STUFF:
-    # https://www.youtube.com/watch?v=5ZMpbdK0uqU
-    # https://www.programcreek.com/python/example/64945/flask.request.get_json
+# https://www.youtube.com/watch?v=5ZMpbdK0uqU
+# https://www.programcreek.com/python/example/64945/flask.request.get_json
 
 ##########################################################
 # IMPORTS
@@ -44,8 +44,9 @@ DELETE /items/ => {'id':'num'} => Delete an item given its id"""
 ##########################################################
 # ROUTES
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Base
+
 
 @APP.route("/")
 def home_page():
@@ -55,10 +56,11 @@ def home_page():
     # trick to display new lines in response
     return Markup(INFO.replace("\n", "<br>"))
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Look up items
 
-@APP.route('/items/', methods = ['GET'])
+
+@APP.route('/items/', methods=['GET'])
 def get_items():
     # FIGURE STUFF OUT
     argsDict = request.args
@@ -90,38 +92,49 @@ def get_items():
 
     # RESPONSE
     response = talk_to_db(prepedStatementStr, valuesArr)
-    if isinstance(response, list): return json.dumps(response)
-    else: return abort(400, "error with the API")
+    if isinstance(response, list):
+        return json.dumps(response)
+    else:
+        return abort(400, "error with the API")
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Add new item
 
 # TESTING:
 # curl -X POST http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"2", "name":"test2", "qty":"12", "price":"12.10", "sid":"50001"}'
-@APP.route('/items/', methods = ['POST'])
+
+
+@APP.route('/items/', methods=['POST'])
 def add_new_item():
     argsDict = request.get_json()
     stip_dict(argsDict)
 
-    validationResultsArr = arguments_validation(argsDict, ["id", "name", "qty", "price", "sid"], True)
+    validationResultsArr = arguments_validation(
+        argsDict, ["id", "name", "qty", "price", "sid"], True)
     if len(validationResultsArr) > 0:
         return abort(400, Markup("<br>".join(validationResultsArr)))
 
-    #return f"Add item {argsDict} using database operations"
+    # return f"Add item {argsDict} using database operations"
     prepedStatementStr = "INSERT INTO items VALUES (%s, %s, %s, %s, %s)"
-    valuesArr = [argsDict["id"], argsDict["name"], argsDict["qty"], argsDict["price"], argsDict["sid"]]
+    valuesArr = [argsDict["id"], argsDict["name"],
+                 argsDict["qty"], argsDict["price"], argsDict["sid"]]
 
     insertionSuccessful = talk_to_db(prepedStatementStr, valuesArr)
 
-    if insertionSuccessful: return jsonify(success=True) # a way to return successful message with Flask
-    else: return abort(400, "error with the API")
+    if insertionSuccessful:
+        # a way to return successful message with Flask
+        return jsonify(success=True)
+    else:
+        return abort(400, "error with the API")
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Update item quanity
 
 # TESTING:
 # curl -X PUT http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"3000", "qty":"12"}'
-@APP.route('/items/', methods = ['PUT'])
+
+
+@APP.route('/items/', methods=['PUT'])
 def update_item_quantity():
     argsDict = request.get_json()
     stip_dict(argsDict)
@@ -130,17 +143,23 @@ def update_item_quantity():
     if len(validationResultsArr) > 0:
         return abort(400, Markup("<br>".join(validationResultsArr)))
 
-    updateSuccessful = talk_to_db("UPDATE items SET quantity=%s WHERE itemID=%s", [argsDict["qty"], argsDict["id"]])
+    updateSuccessful = talk_to_db("UPDATE items SET quantity=%s WHERE itemID=%s", [
+                                  argsDict["qty"], argsDict["id"]])
 
-    if updateSuccessful: return jsonify(success=True) # a way to return successful message with Flask
-    else: return abort(400, "error with the API")
+    if updateSuccessful:
+        # a way to return successful message with Flask
+        return jsonify(success=True)
+    else:
+        return abort(400, "error with the API")
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Delete item
 
 # TESTING:
 # curl -X DELETE http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"3000"}'
-@APP.route('/items/', methods = ['DELETE'])
+
+
+@APP.route('/items/', methods=['DELETE'])
 def delete_item():
     argsDict = request.get_json()
     stip_dict(argsDict)
@@ -149,20 +168,26 @@ def delete_item():
     if len(validationResultsArr) > 0:
         return abort(400, Markup("<br>".join(validationResultsArr)))
 
-    deletionSuccessful = talk_to_db("DELETE FROM items WHERE itemID=%s", [argsDict["id"]])
+    deletionSuccessful = talk_to_db(
+        "DELETE FROM items WHERE itemID=%s", [argsDict["id"]])
 
-    if deletionSuccessful: return jsonify(success=True) # a way to return successful message with Flask
-    else: return abort(400, "error with the API")
+    if deletionSuccessful:
+        # a way to return successful message with Flask
+        return jsonify(success=True)
+    else:
+        return abort(400, "error with the API")
 
 ##########################################################
 # HELPERS
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Validators
 
 # check if the arguments (dict) is valid
 # checks the length and validation of individual arguments, incl from database
 # returns an array containg issues
+
+
 def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
     result = []
 
@@ -177,7 +202,8 @@ def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
         if not is_digit(dictRef["id"]):
             result.append("Invalid id format.")
         else:
-            response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [dictRef["id"]])
+            response = talk_to_db(
+                "SELECT itemID FROM items WHERE itemID=%s", [dictRef["id"]])
             if addingItem and response:
                 result.append("Item already exists.")
             elif not addingItem and not response:
@@ -186,7 +212,8 @@ def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
         if not is_letters(dictRef["name"]):
             result.append("Invalid name format.")
         else:
-            response = talk_to_db("SELECT itemID FROM items WHERE itemName=%s", [dictRef["name"]])
+            response = talk_to_db(
+                "SELECT itemID FROM items WHERE itemName=%s", [dictRef["name"]])
             # assuming 2 items with the same name but different id can be added
             if not addingItem and not response:
                 result.append("Nonexistent name.")
@@ -198,25 +225,31 @@ def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
         if not is_digit(dictRef["sid"]):
             result.append("Invalid supplier id format.")
         else:
-            response = talk_to_db("SELECT supplierID FROM supplier WHERE supplierID=%s", [dictRef["sid"]])
+            response = talk_to_db(
+                "SELECT supplierID FROM supplier WHERE supplierID=%s", [dictRef["sid"]])
             if not response:
                 result.append("Nonexistent sid.")
 
     return result
 
+
 def is_digit(str):
     return True if re.match(r"^\d+$", str) else False
+
 
 def is_number(str):
     return True if re.match(r"^[0-9.]+$", str) else False
 
+
 def is_letters(str):
     return True if re.match(r"^[a-zA-Z ]+$", str) else False
 
-#---------------------------------------------------------
+# ---------------------------------------------------------
 # Database
 
 # https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html
+
+
 def connect_to_db():
     global DB
 
@@ -231,7 +264,7 @@ def connect_to_db():
             print(err)
         quit()
     except Exception as e:
-        print (e)
+        print(e)
         quit()
 
 # prepedStatementStr, replace any values with %s
@@ -240,9 +273,12 @@ def connect_to_db():
 # returns:
     # SELECT: False (improper SQL command), an array of dictionaries (rows), or an empty array (if empty response)
     # Everything else: False (improper SQL command), True (executed successfully)
+
+
 def talk_to_db(prepedStatementStr, valuesArr=None):
     prepedStatementStr = prepedStatementStr.strip()
-    if not valuesArr: valuesArr = []
+    if not valuesArr:
+        valuesArr = []
 
     cursor = DB.cursor()
 
@@ -287,5 +323,8 @@ def stip_dict(dictRef):
 ##########################################################
 # RUN
 
+
 connect_to_db()
-APP.run(port=7777)
+
+if __name__ == '__main__':
+    APP.run(host='0.0.0.0', port=80)
