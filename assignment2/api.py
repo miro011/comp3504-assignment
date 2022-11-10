@@ -22,8 +22,6 @@ from mysql.connector import errorcode
 
 load_dotenv()
 
-print(os.getenv('TEST'))
-
 APP = Flask(__name__)
 
 DB = None
