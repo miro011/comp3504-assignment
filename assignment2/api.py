@@ -320,7 +320,6 @@ def stip_dict(dictRef):
 
 
 connect_to_db()
-# APP.run(port=7777)
 
 
 if __name__ == '__main__':
