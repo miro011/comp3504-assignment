@@ -1,5 +1,6 @@
 # pip install flask
 # pip install mysql-connector-python
+# pip install dotenv
 
 # HELPFUL STUFF:
 # https://www.youtube.com/watch?v=5ZMpbdK0uqU
@@ -8,10 +9,10 @@
 ##########################################################
 # IMPORTS
 
-import json
-import re
+import json, re, os
 
 from flask import *
+from dotenv import load_dotenv
 
 import mysql.connector
 from mysql.connector import errorcode
@@ -19,14 +20,18 @@ from mysql.connector import errorcode
 ##########################################################
 # GLOBALS
 
+load_dotenv()
+
+print(os.getenv('TEST'))
+
 APP = Flask(__name__)
 
 DB = None
 DB_CONFIG = {
-    'user': 'mysql3504',
-    'password': 'u]fN"8GFJf[$4q.B',
-    'host': '34.168.150.80',
-    'database': '3504asg02'
+  'user': os.getenv('DATABASE_USER'),
+  'password': os.getenv('DATABASE_PASSWORD'),
+  'host': os.getenv('DATABASE_HOST'),
+  'database': os.getenv('DATABASE_NAME')
 }
 
 INFO = """GET /items/ => Shows a list of all items
@@ -320,7 +325,6 @@ def stip_dict(dictRef):
 
 
 connect_to_db()
-
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=80)
