@@ -57,6 +57,8 @@ def home_page():
 # ---------------------------------------------------------
 # Look up items
 
+# TESTING:
+# http://34.105.39.147 in browser
 
 @APP.route('/items/', methods=['GET'])
 def get_items():
@@ -99,7 +101,7 @@ def get_items():
 # Add new item
 
 # TESTING:
-# curl -X POST http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"2", "name":"test2", "qty":"12", "price":"12.10", "sid":"50001"}'
+# curl -X POST http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"6001", "name":"sixthousndone", "qty":"10", "price":"12.10", "sid":"50001"}'
 
 
 @APP.route('/items/', methods=['POST'])
@@ -129,7 +131,7 @@ def add_new_item():
 # Update item quanity
 
 # TESTING:
-# curl -X PUT http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"3000", "qty":"12"}'
+# curl -X PUT http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3001", "qty":"12"}'
 
 
 @APP.route('/items/', methods=['PUT'])
@@ -154,7 +156,7 @@ def update_item_quantity():
 # Delete item
 
 # TESTING:
-# curl -X DELETE http://127.0.0.1:7777/items/ --header "Content-Type:application/json" --data '{"id":"3000"}'
+# curl -X DELETE http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3008"}'
 
 
 @APP.route('/items/', methods=['DELETE'])
