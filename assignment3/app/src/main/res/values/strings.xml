@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">COMP3504-Asg03</string>
+    <string name="banner">COMP3504 Inventory System</string>
+    <string name="add_button">Add Product</string>
+    <string name="list_button">List Products</string>
+    <string name="search_button">Search Product</string>
+    <string name="add">add_inv</string>
+    <string name="list">list_inv</string>
+    <string name="search">search_inv</string>
 </resources>
