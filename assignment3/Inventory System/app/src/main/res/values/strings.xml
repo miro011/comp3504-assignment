@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">COMP3504 Inventory System</string>
+    <string name="top_bar">Top Horizontal Bar</string>
+    <string name="bottom_bar">Bottom Horizontal Bar</string>
+    <string name="exit_desc">To Close the App</string>
+    <string name="add_desc">To Add Item</string>
+    <string name="list_desc">To List Items</string>
+    <string name="search_desc">To Search for an Item</string>
+    <string name="info_desc">To Show App Information</string>
+</resources>
