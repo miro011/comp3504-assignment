@@ -1,10 +1,33 @@
 <resources>
-    <string name="app_name">COMP3504 Inventory System</string>
+    @global
     <string name="top_bar">Top Horizontal Bar</string>
     <string name="bottom_bar">Bottom Horizontal Bar</string>
+
+    @main
+    <string name="app_name">COMP3504 Inventory System</string>
     <string name="exit_desc">To Close the App</string>
     <string name="add_desc">To Add Item</string>
     <string name="list_desc">To List Items</string>
     <string name="search_desc">To Search for an Item</string>
     <string name="info_desc">To Show App Information</string>
+
+    @addItem Activity
+    <string name="addItem_title">Add Item</string>
+    <string name="addItem_title_itemId">Item ID: </string>
+    <string name="addItem_title_name">Item Name: </string>
+    <string name="addItem_title_quantity">Quantity</string>
+    <string name="addItem_title_price">Price</string>
+    <string name="addItem_title_supplierID">Supplier ID</string>
+    <string name="addItem_submit_button">Submit</string>
+
+    @searchItem Activity
+    <string name="searchItem_title">Search Item</string>
+
+    @listItem Activity
+    <string name="listItem_title">List Item</string>
+
+
+    @info Activity
+    <string name="info_title">App Info</string>
+
 </resources>
