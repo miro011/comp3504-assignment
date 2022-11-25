@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoView">
+
+    <ImageButton
+        android:id="@+id/info_top_bar"
+        android:layout_width="421dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="-8dp"
+        android:backgroundTint="#848384"
+        android:contentDescription="@string/top_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/title_bar"
+        app:tint="#838283"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/info_bottom_bar"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="421dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="274dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="-8dp"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#848384"
+        android:contentDescription="@string/bottom_bar"
+        app:tint="#838283"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info_top_bar"
+        app:layout_constraintVertical_bias="0.994"
+        app:srcCompat="@android:drawable/title_bar"
+        tools:srcCompat="@android:drawable/title_bar" />
+
+    <ImageButton
+        android:id="@+id/info_exit_button"
+        android:layout_width="59dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginEnd="-5dp"
+        android:backgroundTint="#838283"
+        android:contentDescription="@string/exit_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_delete"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="648dp"
+        android:fontFamily="cursive"
+        android:text="@string/app_name"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/info_bottom_bar"
+        tools:layout_editor_absoluteX="72dp" />
+
+    <TextView
+        android:id="@+id/info_Title"
+        android:layout_width="84dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="163dp"
+        android:fontFamily="cursive"
+        android:text="@string/info_title"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_top_bar" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
