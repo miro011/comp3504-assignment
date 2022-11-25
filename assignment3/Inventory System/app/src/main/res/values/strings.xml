@@ -2,6 +2,7 @@
     @global
     <string name="top_bar">Top Horizontal Bar</string>
     <string name="bottom_bar">Bottom Horizontal Bar</string>
+    <string name="nav_desc">To Open Navigation</string>
 
     @main
     <string name="app_name">COMP3504 Inventory System</string>
@@ -12,12 +13,26 @@
     <string name="info_desc">To Show App Information</string>
 
     @addItem Activity
+    @Titles
     <string name="addItem_title">Add Item</string>
-    <string name="addItem_title_itemId">Item ID: </string>
-    <string name="addItem_title_name">Item Name: </string>
-    <string name="addItem_title_quantity">Quantity</string>
-    <string name="addItem_title_price">Price</string>
-    <string name="addItem_title_supplierID">Supplier ID</string>
+    <string name="addItem_title_itemId">Item ID:</string>
+    <string name="addItem_title_name">Item Name:</string>
+    <string name="addItem_title_quantity">Quantity:</string>
+    <string name="addItem_title_price">Price:</string>
+    <string name="addItem_title_supplierID">Supplier ID:</string>
+    @Hints
+    <string name="addItem_hint_itemId">Enter item ID</string>
+    <string name="addItem_hint_name">Enter item name</string>
+    <string name="addItem_hint_quantity">Enter item quantity</string>
+    <string name="addItem_hint_price">Enter item price</string>
+    <string name="addItem_hint_supplierID">Enter supplier ID</string>
+    @autoHints
+    <string name="addItem_autoHints_itemId">3000</string>
+    <string name="addItem_autoHints_name">Willie Widgets</string>
+    <string name="addItem_autoHints_quantity">10</string>
+    <string name="addItem_autoHints_price">14.50</string>
+    <string name="addItem_autoHints_supplierID">50003</string>
+    @button
     <string name="addItem_submit_button">Submit</string>
 
     @searchItem Activity
