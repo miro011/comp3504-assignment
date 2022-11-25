@@ -65,6 +65,7 @@
         android:layout_marginStart="160dp"
         android:layout_marginBottom="116dp"
         android:backgroundTint="#A1A1A1"
+        android:clickable="true"
         android:text="@string/addItem_submit_button"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@id/addItem_bottom_bar"
