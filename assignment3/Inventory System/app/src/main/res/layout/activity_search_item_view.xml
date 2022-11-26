@@ -4,125 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchItemView">
-
-    <ImageView
-        android:id="@+id/searchItem_top_bar"
-        android:layout_width="421dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="-5dp"
-        android:contentDescription="@string/top_bar"
-        android:scaleType="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg02"
-        tools:ignore="ImageContrastCheck" />
-
-    <ImageView
-        android:id="@+id/searchItem_bottom_bar"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="421dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="274dp"
-        android:layout_marginEnd="-5dp"
-        android:layout_marginBottom="-3dp"
-        android:adjustViewBounds="false"
-        android:contentDescription="@string/bottom_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchItem_top_bar"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bg02"
-        tools:ignore="ImageContrastCheck" />
-
-    <ImageButton
-        android:id="@+id/nav_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="-3dp"
-        android:contentDescription="@string/nav_desc"
-        android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nav_icon" />
-
-    <ImageButton
-        android:id="@+id/searchItem_exit_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/exit_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_delete"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/searchItem_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="644dp"
-        android:fontFamily="cursive"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/searchItem_bottom_bar"
-        app:layout_constraintEnd_toStartOf="@id/searchItem_exit_button"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@id/nav_button" />
-
-    <TextView
-        android:id="@+id/searchItem_Title"
-        android:layout_width="163dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="163dp"
-        android:fontFamily="cursive"
-        android:text="@string/searchItem_title"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchItem_top_bar" />
+    tools:context=".activity_search_item_view">
 
     <TextView
         android:id="@+id/textview_itemID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="161dp"
         android:text="@string/addItem_title_itemId"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchItem_Title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/addItem_textbox_itemID"
         android:layout_width="210dp"
         android:layout_height="48dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="57dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="52dp"
         android:autofillHints="@string/addItem_autoHints_itemId"
         android:ems="10"
         android:hint="@string/addItem_hint_itemId"
         android:inputType="number"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/textview_itemID"
-        app:layout_constraintTop_toBottomOf="@+id/searchItem_Title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textview_itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="30dp"
         android:text="@string/addItem_title_name"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,14 +49,12 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="57dp"
+        android:layout_marginTop="8dp"
         android:autofillHints="@string/addItem_autoHints_name"
         android:ems="10"
         android:hint="@string/addItem_hint_name"
         android:inputType="textPersonName"
         android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textview_itemName"
         app:layout_constraintTop_toBottomOf="@+id/addItem_textbox_itemID" />
 
@@ -149,11 +63,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginBottom="312dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#A1A1A1"
         android:checkable="true"
-        android:text="@string/addItem_submit_button"
+        android:text="@string/searchItem_button"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@id/searchItem_bottom_bar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItem_textbox_itemName" />
+
+    <ImageView
+        android:id="@+id/searchItem_bottom_bar"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="421dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="-3dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/bg02"
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

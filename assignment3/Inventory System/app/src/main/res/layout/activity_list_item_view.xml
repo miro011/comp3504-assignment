@@ -4,90 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListItemView">
-
-    <ImageView
-        android:id="@+id/listItem_top_bar"
-        android:layout_width="421dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="-5dp"
-        android:contentDescription="@string/top_bar"
-        android:scaleType="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg02"
-        tools:ignore="ImageContrastCheck" />
+    tools:context=".activity_list_item_view">
 
     <ImageView
         android:id="@+id/listItem_bottom_bar"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="421dp"
         android:layout_height="54dp"
-        android:layout_marginTop="274dp"
+        android:layout_marginTop="680dp"
         android:layout_marginEnd="-5dp"
         android:layout_marginBottom="-3dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/bottom_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listItem_top_bar"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg02"
         tools:ignore="ImageContrastCheck" />
-
-    <ImageButton
-        android:id="@+id/nav_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="-3dp"
-        android:contentDescription="@string/nav_desc"
-        android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nav_icon" />
-
-    <ImageButton
-        android:id="@+id/listItem_exit_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/exit_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_delete"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/listItem_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="644dp"
-        android:fontFamily="cursive"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/listItem_bottom_bar"
-        app:layout_constraintEnd_toStartOf="@id/listItem_exit_button"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@id/nav_button" />
-
-    <TextView
-        android:id="@+id/listItem_Title"
-        android:layout_width="127dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="163dp"
-        android:fontFamily="cursive"
-        android:text="@string/listItem_title"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listItem_top_bar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
