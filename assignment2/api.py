@@ -62,7 +62,6 @@ def home_page():
 
 @APP.route('/items/', methods=['GET'])
 def get_items():
-    # FIGURE STUFF OUT
     argsDict = request.args
     prepedStatementStr = ""
     valuesArr = []
@@ -73,28 +72,30 @@ def get_items():
 
     # searching for items
     elif len(argsDict) == 1:
-        expectedKeysArr = argsDict.keys()
-        if "id" not in expectedKeysArr and "name" not in expectedKeysArr:
+        if "id" not in argsDict and "name" not in argsDict:
             return abort(400, "Items can only be searched using their name or id")
-
-        validationResultsArr = arguments_validation(argsDict, expectedKeysArr)
-        if len(validationResultsArr) > 0:
-            return abort(400, Markup("<br>".join(validationResultsArr)))
-
-        if "id" in expectedKeysArr:
-            prepedStatementStr = "SELECT * FROM items WHERE itemID=%s"
-            valuesArr.append(argsDict['id'])
-        elif "name" in expectedKeysArr:
-            prepedStatementStr = "SELECT * FROM items WHERE itemName=%s"
-            valuesArr.append(argsDict['name'])
+        if "id" in argsDict:
+            if not is_digit(argsDict["id"]):
+                return abort(400, "Invalid id format.")
+            else: 
+                prepedStatementStr = "SELECT * FROM items WHERE itemID=%s"
+                valuesArr.append(argsDict['id'])
+        elif "name" in argsDict:
+            if not is_letters(argsDict["name"]):
+                return abort(400, "Invalid name format.")
+            else:
+                prepedStatementStr = "SELECT * FROM items WHERE itemName=%s"
+                valuesArr.append(argsDict['name'])
+    
     else:
         return abort(400, "Only 1 argument (id/name) for searching items expected")
 
     # RESPONSE
     response = talk_to_db(prepedStatementStr, valuesArr)
-    if isinstance(response, list):
-        return json.dumps(response)
+    if talk_to_db_success(response):
+        return jsonify(response)
     else:
+        print(response)
         return abort(400, "error with the API")
 
 # ---------------------------------------------------------
@@ -109,22 +110,38 @@ def add_new_item():
     argsDict = request.get_json()
     stip_dict(argsDict)
 
-    validationResultsArr = arguments_validation(
-        argsDict, ["id", "name", "qty", "price", "sid"], True)
-    if len(validationResultsArr) > 0:
-        return abort(400, Markup("<br>".join(validationResultsArr)))
+    result = arguments_validation(argsDict, ["id", "name", "qty", "price", "sid"])
+    if result != "success": return abort(400, result)
+
+    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
+
+    response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
+    if not talk_to_db_success(response):
+        print(response)
+        return abort(400, "error with the API")
+    if len(response) > 0: return abort(400, "Item already exists.")
+
+    if not is_letters(argsDict["name"]): return abort(400, "Invalid name format.")
+    if not is_digit(argsDict["qty"]): return abort(400, "Invalid qty format.")
+    if not is_number(argsDict["price"]): return abort(400, "Invalid price format.")
+    if not is_digit(argsDict["sid"]): return abort(400, "Invalid sid format.")
+    
+    response = talk_to_db("SELECT supplierID FROM supplier WHERE supplierID=%s", [argsDict["sid"]])
+    if not talk_to_db_success(response):
+        print(response)
+        return abort(400, "error with the API")
+    if len(response) == 0: return abort(400, "Nonexistant sid")
+
 
     # return f"Add item {argsDict} using database operations"
     prepedStatementStr = "INSERT INTO items VALUES (%s, %s, %s, %s, %s)"
-    valuesArr = [argsDict["id"], argsDict["name"],
-                 argsDict["qty"], argsDict["price"], argsDict["sid"]]
+    valuesArr = [argsDict["id"], argsDict["name"], argsDict["qty"], argsDict["price"], argsDict["sid"]]
+    response = talk_to_db(prepedStatementStr, valuesArr)
 
-    insertionSuccessful = talk_to_db(prepedStatementStr, valuesArr)
-
-    if insertionSuccessful:
-        # a way to return successful message with Flask
+    if talk_to_db_success(response):
         return jsonify(success=True)
     else:
+        print(response)
         return abort(400, "error with the API")
 
 # ---------------------------------------------------------
@@ -139,17 +156,25 @@ def update_item_quantity():
     argsDict = request.get_json()
     stip_dict(argsDict)
 
-    validationResultsArr = arguments_validation(argsDict, ["id", "qty"])
-    if len(validationResultsArr) > 0:
-        return abort(400, Markup("<br>".join(validationResultsArr)))
+    result = arguments_validation(argsDict, ["id", "qty"])
+    if result != "success": return abort(400, result)
 
-    updateSuccessful = talk_to_db("UPDATE items SET quantity=%s WHERE itemID=%s", [
-                                  argsDict["qty"], argsDict["id"]])
+    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
 
-    if updateSuccessful:
-        # a way to return successful message with Flask
+    response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
+    if not talk_to_db_success(response):
+        print(response)
+        return abort(400, "error with the API")
+    if len(response) == 0: return abort(400, "Nonexistant id")
+
+    if not is_digit(argsDict["qty"]): return abort(400, "Invalid qty format.")
+
+    response = talk_to_db("UPDATE items SET quantity=%s WHERE itemID=%s", [argsDict["qty"], argsDict["id"]])
+
+    if talk_to_db_success(response):
         return jsonify(success=True)
     else:
+        print(response)
         return abort(400, "error with the API")
 
 # ---------------------------------------------------------
@@ -164,17 +189,23 @@ def delete_item():
     argsDict = request.get_json()
     stip_dict(argsDict)
 
-    validationResultsArr = arguments_validation(argsDict, ["id"])
-    if len(validationResultsArr) > 0:
-        return abort(400, Markup("<br>".join(validationResultsArr)))
+    result = arguments_validation(argsDict, ["id"])
+    if result != "success": return abort(400, result)
 
-    deletionSuccessful = talk_to_db(
-        "DELETE FROM items WHERE itemID=%s", [argsDict["id"]])
+    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
 
-    if deletionSuccessful:
-        # a way to return successful message with Flask
+    response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
+    if not talk_to_db_success(response):
+        print(response)
+        return abort(400, "error with the API")
+    if len(response) == 0: return abort(400, "Nonexistant id")
+
+    response = talk_to_db("DELETE FROM items WHERE itemID=%s", [argsDict["id"]])
+
+    if talk_to_db_success(response):
         return jsonify(success=True)
     else:
+        print(response)
         return abort(400, "error with the API")
 
 ##########################################################
@@ -184,13 +215,7 @@ def delete_item():
 # Validators
 
 # check if the arguments (dict) is valid
-# checks the length and validation of individual arguments, incl from database
-# returns an array containg issues
-
-
-def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
-    result = []
-
+def arguments_validation(dictRef, expectedKeysArr):
     if len(dictRef.keys()) < len(expectedKeysArr):
         return ["Not enough arguments provided."]
     elif len(dictRef.keys()) > len(expectedKeysArr):
@@ -198,40 +223,7 @@ def arguments_validation(dictRef, expectedKeysArr, addingItem=False):
     elif sorted(dictRef.keys()) != sorted(expectedKeysArr):
         return ["Unexpected arguments present."]
 
-    if "id" in expectedKeysArr:
-        if not is_digit(dictRef["id"]):
-            result.append("Invalid id format.")
-        else:
-            response = talk_to_db(
-                "SELECT itemID FROM items WHERE itemID=%s", [dictRef["id"]])
-            if addingItem and response:
-                result.append("Item already exists.")
-            elif not addingItem and not response:
-                result.append("Nonexistent id.")
-    if "name" in expectedKeysArr:
-        if not is_letters(dictRef["name"]):
-            result.append("Invalid name format.")
-        else:
-            response = talk_to_db(
-                "SELECT itemID FROM items WHERE itemName=%s", [dictRef["name"]])
-            # assuming 2 items with the same name but different id can be added
-            if not addingItem and not response:
-                result.append("Nonexistent name.")
-    if "qty" in expectedKeysArr and not is_digit(dictRef["qty"]):
-        result.append("Invalid qty format.")
-    if "price" in expectedKeysArr and not is_number(dictRef["price"]):
-        result.append("Invalid price format.")
-    if "sid" in expectedKeysArr:
-        if not is_digit(dictRef["sid"]):
-            result.append("Invalid supplier id format.")
-        else:
-            response = talk_to_db(
-                "SELECT supplierID FROM supplier WHERE supplierID=%s", [dictRef["sid"]])
-            if not response:
-                result.append("Nonexistent sid.")
-
-    return result
-
+    return "success"
 
 def is_digit(str):
     return True if re.match(r"^\d+$", str) else False
@@ -254,18 +246,22 @@ def connect_to_db():
     global DB
 
     try:
+        if DB.is_connected(): return "success"
+    except:
+        pass
+
+    try:
         DB = mysql.connector.connect(**DB_CONFIG)
+        return "success"
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
+            return "connect_to_db(): Something is wrong with your user name or password"
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
+            return "connect_to_db(): Database does not exist"
         else:
-            print(err)
-        quit()
+            return f"connect_to_db(): {err}"
     except Exception as e:
-        print(e)
-        quit()
+        return f"connect_to_db(): {e}"
 
 # prepedStatementStr, replace any values with %s
 # valuesArr, provide the values in order (if no values, empty list)
@@ -276,17 +272,20 @@ def connect_to_db():
 
 
 def talk_to_db(prepedStatementStr, valuesArr=None):
-    prepedStatementStr = prepedStatementStr.strip()
-    if not valuesArr:
-        valuesArr = []
+    connectToDbResult = connect_to_db()
+    if connectToDbResult != "success": return connectToDbResult
 
-    cursor = DB.cursor()
+
+    prepedStatementStr = prepedStatementStr.strip()
+    if not valuesArr: valuesArr = []
+
+    cursor = None
 
     try:
+        cursor = DB.cursor()
         cursor.execute(prepedStatementStr, valuesArr)
     except Exception as e:
-        print(e)
-        return False
+        return f"talk_to_db(): {e}"
 
     result = None
 
@@ -312,6 +311,9 @@ def talk_to_db(prepedStatementStr, valuesArr=None):
     cursor.close()
     return result
 
+def talk_to_db_success(response):
+    return True if type(response) is list or response is True else False
+
 
 ##########################################################
 # GENERIC HELPERS
@@ -322,9 +324,6 @@ def stip_dict(dictRef):
 
 ##########################################################
 # RUN
-
-
-connect_to_db()
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=80)
