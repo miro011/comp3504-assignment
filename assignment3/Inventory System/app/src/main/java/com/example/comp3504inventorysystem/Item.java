@@ -34,10 +34,9 @@ public class Item {
         this.id = id;
     }
 
-    public void setIdStr(String id) {
-        int newId;
+    public void setIdStr(String idStr) {
+        int newId = Integer.parseInt(idStr);
 
-        newId = Integer.parseInt(id);
         if (newId < 0) {
             throw new IllegalArgumentException("ID must be an int >= 0");
         }
@@ -50,6 +49,9 @@ public class Item {
     }
 
     public void setName(String name) {
+        if (name.equals("")) {
+            throw new IllegalArgumentException("Name can't be empty");
+        }
         this.name = name;
     }
 
@@ -61,6 +63,11 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public void setQuantityStr(String qtyStr) {
+        int newQty = Integer.parseInt(qtyStr);
+        this.quantity = newQty;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -69,12 +76,32 @@ public class Item {
         this.price = price;
     }
 
+    public void setPriceStr(String priceStr) {
+        float newPrice = Float.parseFloat(priceStr);
+
+        if (newPrice < 0) {
+            throw new IllegalArgumentException("Price must be >= 0.00");
+        }
+
+        this.price = newPrice;
+    }
+
     public int getSupplierId() {
         return supplierId;
     }
 
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
+    }
+
+    public void setSupplierIdStr(String supplierIdStr) {
+        int newSupplierId = Integer.parseInt(supplierIdStr);
+
+        if (newSupplierId < 0) {
+            throw new IllegalArgumentException("Supplier ID must be an int >= 0");
+        }
+
+        this.id = newSupplierId;
     }
 
     @Override
