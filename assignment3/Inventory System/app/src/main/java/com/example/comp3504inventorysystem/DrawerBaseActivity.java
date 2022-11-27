@@ -21,9 +21,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class activity_drawer_base extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
-
 
     @SuppressLint("InflateParams")
     @Override
@@ -54,23 +53,23 @@ public class activity_drawer_base extends AppCompatActivity implements Navigatio
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                startActivity(new Intent(this, activity_dashboard.class));
+                startActivity(new Intent(this, DashboardActivity.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_addItem:
-                startActivity(new Intent(this, activity_add_item_view.class));
+                startActivity(new Intent(this, AddItemActivity.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_listItem:
-                startActivity(new Intent(this, activity_list_item_view.class));
+                startActivity(new Intent(this, ListItemActivity.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_searchItem:
-                startActivity(new Intent(this, activity_search_item_view.class));
+                startActivity(new Intent(this, SearchItemActivity.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_info:
-                startActivity(new Intent(this, activity_info_view.class));
+                startActivity(new Intent(this, InfoViewActivity.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_exit:
@@ -88,4 +87,3 @@ public class activity_drawer_base extends AppCompatActivity implements Navigatio
         }
     }
 }
-

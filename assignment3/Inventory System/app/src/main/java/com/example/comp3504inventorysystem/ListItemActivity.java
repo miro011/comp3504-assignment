@@ -1,10 +1,9 @@
 package com.example.comp3504inventorysystem;
 
 import android.os.Bundle;
-
 import com.example.comp3504inventorysystem.databinding.ActivityListItemViewBinding;
 
-public class activity_list_item_view extends activity_drawer_base {
+public class ListItemActivity extends DrawerBaseActivity {
 
     private long backClickTime;
     ActivityListItemViewBinding activityListItemViewBinding;
