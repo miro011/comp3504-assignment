@@ -6,6 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".activity_info_view">
 
+    <TextView
+        android:id="@+id/title_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_title_banner"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/group_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_group"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_banner" />
+
+    <TextView
+        android:id="@+id/Miro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_Miroslav"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_text" />
+
+    <TextView
+        android:id="@+id/Terrence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_Terrence"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Miro" />
+
+    <TextView
+        android:id="@+id/Travis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_Travis"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Terrence" />
+
+    <TextView
+        android:id="@+id/Lorenzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/info_Lorenzo"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Travis" />
+
     <ImageView
         android:id="@+id/info_bottom_bar"
         style="@style/Widget.AppCompat.ImageButton"
@@ -21,5 +99,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg02"
         tools:ignore="ImageContrastCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

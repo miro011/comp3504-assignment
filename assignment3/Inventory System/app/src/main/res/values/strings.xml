@@ -3,7 +3,8 @@
     <string name="top_bar">Top Horizontal Bar</string>
     <string name="bottom_bar">Bottom Horizontal Bar</string>
     <string name="nav_desc">To Open Navigation</string>
-    <string name="banner_title">COMP3504 Inventory System</string>
+    <string name="banner_title">COMP3504 Inventory System</string>>
+    <string name="dashboard_scroll">To scroll things</string>
 
     @Dashboard
     <string name="app_name">COMP3504\n Inventory System</string>
@@ -40,18 +41,24 @@
     <string name="addItem_autoHints_quantity">10</string>
     <string name="addItem_autoHints_price">14.50</string>
     <string name="addItem_autoHints_supplierID">50003</string>
-    @button
+
+    @buttons
     <string name="addItem_submit_button">Submit</string>
+    <string name="searchItem_button">Search</string>
 
     @searchItem Activity
     <string name="searchItem_title">Search Item</string>
-    <string name="searchItem_button">Search</string>
 
     @listItem Activity
     <string name="listItem_title">List Item</string>
 
-
     @info Activity
     <string name="info_title">App Info</string>
+    <string name="info_title_banner">COMP3504\nAssignment 03</string>
+    <string name="info_group">Group Members:</string>
+    <string name="info_Miroslav">Miroslav Nikolov</string>
+    <string name="info_Terrence">Terrence Plunkett</string>
+    <string name="info_Travis">Travis Tkachyk</string>
+    <string name="info_Lorenzo">Lorenzo Young</string>
 
 </resources>
