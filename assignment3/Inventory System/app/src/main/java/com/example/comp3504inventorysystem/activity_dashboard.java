@@ -16,4 +16,5 @@ public class activity_dashboard extends activity_drawer_base {
         setContentView(activityDashbardBinding.getRoot());
         allocateActivityTitle("Dashboard");
     }
+
 }

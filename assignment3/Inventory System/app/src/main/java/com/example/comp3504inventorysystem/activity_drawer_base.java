@@ -39,6 +39,8 @@ public class activity_drawer_base extends AppCompatActivity implements Navigatio
         NavigationView navView = drawerLayout.findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
 
+        navView.setItemIconTintList(null);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.menu_drawer_open, R.string.menu_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
