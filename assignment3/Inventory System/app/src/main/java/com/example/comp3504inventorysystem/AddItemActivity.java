@@ -1,6 +1,11 @@
 package com.example.comp3504inventorysystem;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 import com.example.comp3504inventorysystem.databinding.ActivityAddItemViewBinding;
 
 public class AddItemActivity extends DrawerBaseActivity {
@@ -13,10 +18,46 @@ public class AddItemActivity extends DrawerBaseActivity {
         activityAddItemViewBinding = ActivityAddItemViewBinding.inflate(getLayoutInflater());
         setContentView(activityAddItemViewBinding.getRoot());
         allocateActivityTitle("Add Item");
+
+        Button buttonOne = (Button) findViewById(R.id.addItem_submit);
+        buttonOne.setOnClickListener(new HandleClick(this));
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private class HandleClick implements View.OnClickListener {
+        AddItemActivity parentClass;
+
+        public HandleClick(AddItemActivity parentClass) {
+            this.parentClass = parentClass;
+        }
+
+        public void onClick(View view) {
+            // Button btn = (Button)view;
+            TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
+            TextView name = (TextView) findViewById(R.id.addItem_textbox_itemName);
+            TextView quantity = (TextView) findViewById(R.id.addItem_textbox_quantity);
+            TextView price = (TextView) findViewById(R.id.addItem_textbox_price);
+            TextView supplierID = (TextView) findViewById(R.id.addItem_textbox_supplierID);
+            // update the TextView text
+            Item item = new Item();
+
+            try {
+                item.setIdStr(id.getText().toString());
+            } catch (IllegalArgumentException e) {
+                setErrorOnField(id);
+            }
+
+            parentClass.api.addItem(item);
+        }
+    }
+
+    public void setErrorOnField(TextView field) {
+        System.out.format("Invalid input on field %s", field.getId());
+        field.setBackgroundColor(ContextCompat.getColor(field.getContext(), R.color.invalid_field_red));
+        field.setSelected(true);
     }
 }
