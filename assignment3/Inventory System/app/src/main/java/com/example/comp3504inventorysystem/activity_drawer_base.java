@@ -54,32 +54,28 @@ public class activity_drawer_base extends AppCompatActivity implements Navigatio
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                finish();
                 startActivity(new Intent(this, activity_dashboard.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_addItem:
-                finish();
                 startActivity(new Intent(this, activity_add_item_view.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_listItem:
-                finish();
                 startActivity(new Intent(this, activity_list_item_view.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_searchItem:
-                finish();
                 startActivity(new Intent(this, activity_search_item_view.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_info:
-                finish();
                 startActivity(new Intent(this, activity_info_view.class));
                 overridePendingTransition(0,0);
                 break;
             case nav_exit:
-                finish();
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(0);
                 break;
         }

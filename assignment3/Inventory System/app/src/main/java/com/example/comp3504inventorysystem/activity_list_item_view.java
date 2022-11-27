@@ -6,6 +6,7 @@ import com.example.comp3504inventorysystem.databinding.ActivityListItemViewBindi
 
 public class activity_list_item_view extends activity_drawer_base {
 
+    private long backClickTime;
     ActivityListItemViewBinding activityListItemViewBinding;
 
     @Override
@@ -14,5 +15,10 @@ public class activity_list_item_view extends activity_drawer_base {
         activityListItemViewBinding = ActivityListItemViewBinding.inflate(getLayoutInflater());
         setContentView(activityListItemViewBinding.getRoot());
         allocateActivityTitle("List Item");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

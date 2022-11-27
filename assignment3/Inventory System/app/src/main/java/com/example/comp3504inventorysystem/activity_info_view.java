@@ -15,4 +15,9 @@ public class activity_info_view extends activity_drawer_base {
         setContentView(activityInfoViewBinding.getRoot());
         allocateActivityTitle("App Info");
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

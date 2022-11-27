@@ -8,7 +8,6 @@ import com.example.comp3504inventorysystem.databinding.ActivityDashbardBinding;
 
 
 public class activity_dashboard extends activity_drawer_base {
-
     ActivityDashbardBinding activityDashbardBinding;
 
     @Override
@@ -30,23 +29,25 @@ public class activity_dashboard extends activity_drawer_base {
     }
 
     public void openAddItemActivity(){
-        finish();
         startActivity(new Intent(this, activity_add_item_view.class));
         overridePendingTransition(0,0);
     }
     public void openListItemActivity(){
-        finish();
         startActivity(new Intent(this, activity_list_item_view.class));
         overridePendingTransition(0,0);
     }
     public void openSearchItemActivity(){
-        finish();
         startActivity(new Intent(this, activity_search_item_view.class));
         overridePendingTransition(0,0);
     }
     public void openInfoActivity(){
-        finish();
         startActivity(new Intent(this, activity_info_view.class));
         overridePendingTransition(0,0);
+    }
+
+    @Override
+    public void onBackPressed() {
+            super.onBackPressed();
+            System.exit(0);
     }
 }

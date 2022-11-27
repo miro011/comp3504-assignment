@@ -6,6 +6,7 @@ import com.example.comp3504inventorysystem.databinding.ActivitySearchItemViewBin
 
 public class activity_search_item_view extends activity_drawer_base {
 
+    private long backClickTime;
     ActivitySearchItemViewBinding activitySearchItemViewBinding;
 
     @Override
@@ -14,5 +15,10 @@ public class activity_search_item_view extends activity_drawer_base {
         activitySearchItemViewBinding = ActivitySearchItemViewBinding.inflate(getLayoutInflater());
         setContentView(activitySearchItemViewBinding.getRoot());
         allocateActivityTitle("Search Item");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
