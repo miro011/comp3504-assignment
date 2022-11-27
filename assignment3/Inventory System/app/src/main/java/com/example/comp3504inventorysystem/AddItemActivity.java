@@ -1,5 +1,6 @@
 package com.example.comp3504inventorysystem;
 
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class AddItemActivity extends DrawerBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Resources res = getResources();
         super.onCreate(savedInstanceState);
         activityAddItemViewBinding = ActivityAddItemViewBinding.inflate(getLayoutInflater());
         setContentView(activityAddItemViewBinding.getRoot());
@@ -94,7 +96,11 @@ public class AddItemActivity extends DrawerBaseActivity {
                 setErrorOnField(supplierID);
             }
 
-            parentClass.api.addItem(item);
+            try {
+                parentClass.api.addItem(item);
+            } catch (Exception e) {
+
+            }
         }
     }
 

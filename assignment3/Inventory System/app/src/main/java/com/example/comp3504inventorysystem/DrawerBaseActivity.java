@@ -8,6 +8,7 @@ import static com.example.comp3504inventorysystem.R.id.nav_searchItem;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,10 +25,13 @@ import com.google.android.material.navigation.NavigationView;
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     API api;
+    Resources res;
 
     @SuppressLint("InflateParams")
     @Override
     public void setContentView(View view) {
+        res = getResources();
+
         drawerLayout =(DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer_base, null);
         FrameLayout container = drawerLayout.findViewById(R.id.activity_container);
         container.addView(view);
@@ -45,7 +49,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        this.api = new API();
+        this.api = new API(getString(R.string.host), res.getInteger(R.integer.port));
     }
 
     @SuppressLint("NonConstantResourceId")
