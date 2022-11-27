@@ -61,4 +61,7 @@
     <string name="info_Travis">Travis Tkachyk</string>
     <string name="info_Lorenzo">Lorenzo Young</string>
 
+    @API
+    <string name="host">example.com</string>
+    <integer name="port">80</integer>
 </resources>
