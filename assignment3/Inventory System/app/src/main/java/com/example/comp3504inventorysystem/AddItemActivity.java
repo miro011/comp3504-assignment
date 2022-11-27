@@ -20,7 +20,7 @@ public class AddItemActivity extends DrawerBaseActivity {
         allocateActivityTitle("Add Item");
 
         Button buttonOne = (Button) findViewById(R.id.addItem_submit);
-        buttonOne.setOnClickListener(new HandleClick(this));
+        buttonOne.setOnClickListener(new HandleSubmit(this));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class AddItemActivity extends DrawerBaseActivity {
     private class HandleClick implements View.OnClickListener {
         AddItemActivity parentClass;
 
-        public HandleClick(AddItemActivity parentClass) {
+        public HandleSubmit(AddItemActivity parentClass) {
             this.parentClass = parentClass;
         }
 
