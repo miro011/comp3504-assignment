@@ -21,6 +21,9 @@ public class AddItemActivity extends DrawerBaseActivity {
 
         Button buttonOne = (Button) findViewById(R.id.addItem_submit);
         buttonOne.setOnClickListener(new HandleSubmit(this));
+
+        TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
+        id.setOnClickListener(new HandleFocus());
     }
 
     @Override
@@ -28,7 +31,15 @@ public class AddItemActivity extends DrawerBaseActivity {
         super.onBackPressed();
     }
 
-    private class HandleClick implements View.OnClickListener {
+    private class HandleFocus implements View.OnClickListener {
+        public void onClick(View view) {
+            if (view.getId() == R.id.addItem_textbox_itemID) {
+                clearErrorOnField((TextView) view);
+            }
+        }
+    }
+
+    private class HandleSubmit implements View.OnClickListener {
         AddItemActivity parentClass;
 
         public HandleSubmit(AddItemActivity parentClass) {
@@ -56,8 +67,11 @@ public class AddItemActivity extends DrawerBaseActivity {
     }
 
     public void setErrorOnField(TextView field) {
-        System.out.format("Invalid input on field %s", field.getId());
         field.setBackgroundColor(ContextCompat.getColor(field.getContext(), R.color.invalid_field_red));
         field.setSelected(true);
+    }
+
+    public void clearErrorOnField(TextView field) {
+        field.setBackgroundResource(android.R.drawable.btn_default);
     }
 }
