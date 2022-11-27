@@ -61,13 +61,11 @@ public class AddItemActivity extends DrawerBaseActivity {
         }
 
         public void onClick(View view) {
-            // Button btn = (Button)view;
             TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
             TextView name = (TextView) findViewById(R.id.addItem_textbox_itemName);
             TextView quantity = (TextView) findViewById(R.id.addItem_textbox_quantity);
             TextView price = (TextView) findViewById(R.id.addItem_textbox_price);
             TextView supplierID = (TextView) findViewById(R.id.addItem_textbox_supplierID);
-            // update the TextView text
             Item item = new Item();
 
             try {
@@ -75,25 +73,21 @@ public class AddItemActivity extends DrawerBaseActivity {
             } catch (IllegalArgumentException e) {
                 setErrorOnField(id);
             }
-
             try {
                 item.setName(name.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(name);
             }
-
             try {
                 item.setQuantityStr(quantity.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(quantity);
             }
-
             try {
                 item.setPriceStr(price.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(price);
             }
-
             try {
                 item.setSupplierIdStr(supplierID.getText().toString());
             } catch (IllegalArgumentException e) {
