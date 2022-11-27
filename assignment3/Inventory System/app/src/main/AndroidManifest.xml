@@ -13,7 +13,7 @@
         android:theme="@style/Theme.COMP3504InventorySystem"
         tools:targetApi="31">
         <activity
-            android:name=".activity_dashboard"
+            android:name=".DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,35 +25,35 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_drawer_base"
+            android:name=".DrawerBaseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_info_view"
+            android:name=".InfoViewActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_list_item_view"
+            android:name=".ListItemActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_search_item_view"
+            android:name=".SearchItemActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_add_item_view"
+            android:name=".AddItemActivity"
             android:exported="false">
 
             <meta-data
@@ -61,7 +61,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity_main"
+            android:name=".MainActivity"
             android:exported="false">
 
             <meta-data

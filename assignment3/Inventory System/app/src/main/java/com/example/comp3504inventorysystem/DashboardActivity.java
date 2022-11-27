@@ -3,11 +3,9 @@ package com.example.comp3504inventorysystem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
-
 import com.example.comp3504inventorysystem.databinding.ActivityDashbardBinding;
 
-
-public class activity_dashboard extends activity_drawer_base {
+public class DashboardActivity extends DrawerBaseActivity {
     ActivityDashbardBinding activityDashbardBinding;
 
     @Override
@@ -29,19 +27,19 @@ public class activity_dashboard extends activity_drawer_base {
     }
 
     public void openAddItemActivity(){
-        startActivity(new Intent(this, activity_add_item_view.class));
+        startActivity(new Intent(this, AddItemActivity.class));
         overridePendingTransition(0,0);
     }
     public void openListItemActivity(){
-        startActivity(new Intent(this, activity_list_item_view.class));
+        startActivity(new Intent(this, ListItemActivity.class));
         overridePendingTransition(0,0);
     }
     public void openSearchItemActivity(){
-        startActivity(new Intent(this, activity_search_item_view.class));
+        startActivity(new Intent(this, SearchItemActivity.class));
         overridePendingTransition(0,0);
     }
     public void openInfoActivity(){
-        startActivity(new Intent(this, activity_info_view.class));
+        startActivity(new Intent(this, InfoViewActivity.class));
         overridePendingTransition(0,0);
     }
 
