@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
+    API api;
 
     @SuppressLint("InflateParams")
     @Override
@@ -43,6 +44,8 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.menu_drawer_open, R.string.menu_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        this.api = new API();
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -87,3 +90,4 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         }
     }
 }
+
