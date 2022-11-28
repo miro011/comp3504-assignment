@@ -32,12 +32,12 @@ DB_CONFIG = {
   'database': os.getenv('DATABASE_NAME')
 }
 
-INFO = """GET /items/ => Shows a list of all items
-GET /items/?id=num => Search for an item by id
-GET /items/?name=somename => Search for an item by name
-POST /items/ => {'id':'num', 'name':'somename', 'qty':'num', 'price':'num.num', 'sid':'num'} => Add new item
-PUT /items/ => {'id':'num', 'qty':'num'} => Update the quantity of an item
-DELETE /items/ => {'id':'num'} => Delete an item given its id"""
+INFO = '''GET /items/ => {} => Shows a list of all items
+GET /items/ => {"id":"num"} => Search for an item by id
+GET /items/ => {"name":"somename"} => Search for an item by name
+POST /items/ => {"id":"num", "name":"somename", "qty":"num", "price":"num.num", "sid":"num"} => Add new item
+PUT /items/ => {"id":"num", "qty":"num"} => Update the quantity of an item
+DELETE /items/ => {"id":"num"} => Delete an item given its id'''
 
 ##########################################################
 # ROUTES
@@ -57,12 +57,19 @@ def home_page():
 # ---------------------------------------------------------
 # Look up items
 
-# TESTING:
-# http://34.105.39.147 in browser
+# TRY IT:
+# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json"
+# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{}'
+# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3001"}'
+# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"name":"Widgets"}'
 
 @APP.route('/items/', methods=['GET'])
 def get_items():
-    argsDict = request.args
+    argsDict = None
+    try: argsDict = request.get_json()
+    except: argsDict = {}
+    stip_dict(argsDict)
+
     prepedStatementStr = ""
     valuesArr = []
 
@@ -101,7 +108,7 @@ def get_items():
 # ---------------------------------------------------------
 # Add new item
 
-# TESTING:
+# TRY IT:
 # curl -X POST http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"6001", "name":"sixthousndone", "qty":"10", "price":"12.10", "sid":"50001"}'
 
 
@@ -147,7 +154,7 @@ def add_new_item():
 # ---------------------------------------------------------
 # Update item quanity
 
-# TESTING:
+# TRY IT:
 # curl -X PUT http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3001", "qty":"12"}'
 
 
@@ -180,7 +187,7 @@ def update_item_quantity():
 # ---------------------------------------------------------
 # Delete item
 
-# TESTING:
+# TRY IT:
 # curl -X DELETE http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3008"}'
 
 
