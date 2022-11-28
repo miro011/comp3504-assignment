@@ -32,9 +32,9 @@ DB_CONFIG = {
   'database': os.getenv('DATABASE_NAME')
 }
 
-INFO = '''GET /items/ => {} => Shows a list of all items
-GET /items/ => {"id":"num"} => Search for an item by id
-GET /items/ => {"name":"somename"} => Search for an item by name
+INFO = '''GET /items/ => Shows a list of all items
+GET /items/?json=encodedjsondata => {"id":"num"} => Search for an item by id
+GET /items/?json=encodedjsondata => {"name":"somename"} => Search for an item by name
 POST /items/ => {"id":"num", "name":"somename", "qty":"num", "price":"num.num", "sid":"num"} => Add new item
 PUT /items/ => {"id":"num", "qty":"num"} => Update the quantity of an item
 DELETE /items/ => {"id":"num"} => Delete an item given its id'''
@@ -45,11 +45,10 @@ DELETE /items/ => {"id":"num"} => Delete an item given its id'''
 # ---------------------------------------------------------
 # Base
 
-
 @APP.route("/")
 def home_page():
     if request.method != "GET":
-        return abort(400, "Base route is GET only and it provides infomration about this API")
+        return "Base route is GET only and it provides infomration about this API"
 
     # trick to display new lines in response
     return Markup(INFO.replace("\n", "<br>"))
@@ -58,15 +57,14 @@ def home_page():
 # Look up items
 
 # TRY IT:
-# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json"
-# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{}'
-# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"id":"3001"}'
-# curl -X GET http://34.105.39.147/items/ --header "Content-Type:application/json" --data '{"name":"Widgets"}'
+# curl -X GET http://34.105.39.147/items/
+# curl -X GET http://34.105.39.147/items/?json={"id"%3A"3001"}
 
 @APP.route('/items/', methods=['GET'])
 def get_items():
     argsDict = None
-    try: argsDict = request.get_json()
+    getArgs = request.args
+    try: argsDict = json.loads(getArgs["json"])
     except: argsDict = {}
     stip_dict(argsDict)
 
@@ -80,22 +78,22 @@ def get_items():
     # searching for items
     elif len(argsDict) == 1:
         if "id" not in argsDict and "name" not in argsDict:
-            return abort(400, "Items can only be searched using their name or id")
+            return "Items can only be searched using their name or id"
         if "id" in argsDict:
             if not is_digit(argsDict["id"]):
-                return abort(400, "Invalid id format.")
+                return "Invalid id format."
             else: 
                 prepedStatementStr = "SELECT * FROM items WHERE itemID=%s"
                 valuesArr.append(argsDict['id'])
         elif "name" in argsDict:
             if not is_letters(argsDict["name"]):
-                return abort(400, "Invalid name format.")
+                return "Invalid name format."
             else:
                 prepedStatementStr = "SELECT * FROM items WHERE itemName=%s"
                 valuesArr.append(argsDict['name'])
     
     else:
-        return abort(400, "Only 1 argument (id/name) for searching items expected")
+        return "Only 1 argument (id/name) for searching items expected"
 
     # RESPONSE
     response = talk_to_db(prepedStatementStr, valuesArr)
@@ -103,7 +101,7 @@ def get_items():
         return jsonify(response)
     else:
         print(response)
-        return abort(400, "error with the API")
+        return "internal error with the API"
 
 # ---------------------------------------------------------
 # Add new item
@@ -118,26 +116,26 @@ def add_new_item():
     stip_dict(argsDict)
 
     result = arguments_validation(argsDict, ["id", "name", "qty", "price", "sid"])
-    if result != "success": return abort(400, result)
+    if result != "success": return result
 
-    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
+    if not is_digit(argsDict["id"]): return "Invalid id format."
 
     response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
     if not talk_to_db_success(response):
         print(response)
-        return abort(400, "error with the API")
-    if len(response) > 0: return abort(400, "Item already exists.")
+        return "error with the API"
+    if len(response) > 0: return "Item already exists."
 
-    if not is_letters(argsDict["name"]): return abort(400, "Invalid name format.")
-    if not is_digit(argsDict["qty"]): return abort(400, "Invalid qty format.")
-    if not is_number(argsDict["price"]): return abort(400, "Invalid price format.")
-    if not is_digit(argsDict["sid"]): return abort(400, "Invalid sid format.")
+    if not is_letters(argsDict["name"]): return "Invalid name format."
+    if not is_digit(argsDict["qty"]): return "Invalid qty format."
+    if not is_number(argsDict["price"]): return "Invalid price format."
+    if not is_digit(argsDict["sid"]): return "Invalid sid format."
     
     response = talk_to_db("SELECT supplierID FROM supplier WHERE supplierID=%s", [argsDict["sid"]])
     if not talk_to_db_success(response):
         print(response)
-        return abort(400, "error with the API")
-    if len(response) == 0: return abort(400, "Nonexistant sid")
+        return "internal error with the API"
+    if len(response) == 0: return "Nonexistant sid"
 
 
     # return f"Add item {argsDict} using database operations"
@@ -149,7 +147,7 @@ def add_new_item():
         return jsonify(success=True)
     else:
         print(response)
-        return abort(400, "error with the API")
+        return "internal error with the API"
 
 # ---------------------------------------------------------
 # Update item quanity
@@ -164,17 +162,17 @@ def update_item_quantity():
     stip_dict(argsDict)
 
     result = arguments_validation(argsDict, ["id", "qty"])
-    if result != "success": return abort(400, result)
+    if result != "success": return result
 
-    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
+    if not is_digit(argsDict["id"]): return "Invalid id format."
 
     response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
     if not talk_to_db_success(response):
         print(response)
-        return abort(400, "error with the API")
-    if len(response) == 0: return abort(400, "Nonexistant id")
+        return "error with the API"
+    if len(response) == 0: return "Nonexistant id"
 
-    if not is_digit(argsDict["qty"]): return abort(400, "Invalid qty format.")
+    if not is_digit(argsDict["qty"]): return "Invalid qty format."
 
     response = talk_to_db("UPDATE items SET quantity=%s WHERE itemID=%s", [argsDict["qty"], argsDict["id"]])
 
@@ -182,7 +180,7 @@ def update_item_quantity():
         return jsonify(success=True)
     else:
         print(response)
-        return abort(400, "error with the API")
+        return "internal error with the API"
 
 # ---------------------------------------------------------
 # Delete item
@@ -197,15 +195,15 @@ def delete_item():
     stip_dict(argsDict)
 
     result = arguments_validation(argsDict, ["id"])
-    if result != "success": return abort(400, result)
+    if result != "success": return result
 
-    if not is_digit(argsDict["id"]): return abort(400, "Invalid id format.")
+    if not is_digit(argsDict["id"]): return "Invalid id format."
 
     response = talk_to_db("SELECT itemID FROM items WHERE itemID=%s", [argsDict["id"]])
     if not talk_to_db_success(response):
         print(response)
-        return abort(400, "error with the API")
-    if len(response) == 0: return abort(400, "Nonexistant id")
+        return "error with the API"
+    if len(response) == 0: return "Nonexistant id"
 
     response = talk_to_db("DELETE FROM items WHERE itemID=%s", [argsDict["id"]])
 
@@ -213,7 +211,7 @@ def delete_item():
         return jsonify(success=True)
     else:
         print(response)
-        return abort(400, "error with the API")
+        return "internal error with the API"
 
 ##########################################################
 # HELPERS
@@ -297,7 +295,8 @@ def talk_to_db(prepedStatementStr, valuesArr=None):
     result = None
 
     if prepedStatementStr.lower().startswith("select"):
-        result = []
+        result = {}
+        resultKey = 0
         # cursor.description returns the row names => [("rowName", "otherInfo"), (rowName, "otherInfo"), ...]
         # have to call and copy cursor.description before fetchall() because fetchall() seems to screw it up
         rowNamesArr = []
@@ -309,7 +308,8 @@ def talk_to_db(prepedStatementStr, valuesArr=None):
             rowDict = {}
             for i in range(len(rowNamesArr)):
                 rowDict[rowNamesArr[i]] = rowDataArr[i]
-            result.append(rowDict)
+            result[f"{resultKey}"] = rowDict
+            resultKey += 1
     else:
         result = True
         # by default Connector/Python does not autocommit, it is important to call this method after every transaction that modifies data for tables
@@ -319,7 +319,7 @@ def talk_to_db(prepedStatementStr, valuesArr=None):
     return result
 
 def talk_to_db_success(response):
-    return True if type(response) is list or response is True else False
+    return True if type(response) is dict or response is True else False
 
 
 ##########################################################
