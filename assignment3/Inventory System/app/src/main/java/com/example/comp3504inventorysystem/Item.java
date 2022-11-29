@@ -3,19 +3,19 @@ package com.example.comp3504inventorysystem;
 import java.util.Locale;
 
 public class Item {
-    private int id;
+    private Integer id;
     private String name;
-    private int quantity;
-    private float price;
-    private int supplierId;
+    private Integer quantity;
+    private Float price;
+    private Integer supplierId;
     Locale locale = new Locale("en", "CA");
 
     public Item() {
-        this.id = 0;
-        this.name = "";
-        this.quantity = 0;
-        this.price = 0;
-        this.supplierId = 0;
+        this.id = null;
+        this.name = null;
+        this.quantity = null;
+        this.price = null;
+        this.supplierId = null;
     }
 
     public Item(int id, String itemName, int quantity, float price, int supplierId) {
@@ -102,6 +102,20 @@ public class Item {
         }
 
         this.id = newSupplierId;
+    }
+
+    public String toJsonString() {
+        String output = "";
+        if (this.id != null) output += "\"id\":" + "\"" + Integer.toString(this.id) + "\",";
+        if (this.name != null) output += "\"name\":" + "\"" + this.name + "\",";
+        if (this.quantity != null) output += "\"qty\":" + "\"" + Integer.toString(this.quantity) + "\",";
+        if (this.price != null) output += "\"price\":" + "\"" + Float.toString(this.price) + "\",";
+        if (this.supplierId != null) output += "\"sid\":" + "\"" + Integer.toString(this.supplierId) + "\",";
+
+        // remove the last coma
+        if (output.length() > 0 ) output = output.substring(0, output.length() - 1);
+        output = "{" + output + "}";
+        return output;
     }
 
     @Override
