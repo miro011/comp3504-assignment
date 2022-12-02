@@ -74,32 +74,43 @@ public class AddItemActivity extends DrawerBaseActivity {
                 item.setIdStr(id.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(id);
+                showPopup(activityAddItemViewBinding.getRoot(), "invalid id format", "error");
+                return;
             }
             try {
                 item.setName(name.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(name);
+                showPopup(activityAddItemViewBinding.getRoot(), "invalid name format", "error");
+                return;
             }
             try {
                 item.setQuantityStr(quantity.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(quantity);
+                showPopup(activityAddItemViewBinding.getRoot(), "invalid quantity format", "error");
+                return;
             }
             try {
                 item.setPriceStr(price.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(price);
+                showPopup(activityAddItemViewBinding.getRoot(), "invalid price format", "error");
+                return;
             }
             try {
                 item.setSupplierIdStr(supplierID.getText().toString());
             } catch (IllegalArgumentException e) {
                 setErrorOnField(supplierID);
+                showPopup(activityAddItemViewBinding.getRoot(), "invalid supplier id format", "error");
+                return;
             }
 
-            try {
-                parentClass.api.addItem(item);
-            } catch (Exception e) {
-
+            String response = parentClass.api.addItem(item);
+            if (response == "success") {
+                showPopup(activityAddItemViewBinding.getRoot(), "Item added!", "success");
+            } else {
+                showPopup(activityAddItemViewBinding.getRoot(), response.toString(), "error");
             }
         }
     }

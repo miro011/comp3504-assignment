@@ -87,7 +87,7 @@ public class Item {
     }
 
     public int getSupplierId() {
-        return supplierId;
+        return this.supplierId;
     }
 
     public void setSupplierId(int supplierId) {
@@ -101,7 +101,7 @@ public class Item {
             throw new IllegalArgumentException("Supplier ID must be an int >= 0");
         }
 
-        this.id = newSupplierId;
+        this.supplierId = newSupplierId;
     }
 
     public String toJsonString() {

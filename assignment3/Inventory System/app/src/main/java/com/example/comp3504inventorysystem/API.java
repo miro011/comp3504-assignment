@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.net.*;
 import java.io.*;
 
+// to prevent API error "NetworkOnMainThreadException"
+import android.os.StrictMode;
+
 public class API {
     private String host;
     private int port;
@@ -13,14 +16,23 @@ public class API {
     public API(String host, int port) {
         this.host = host;
         this.port = port;
+
+        // to prevent API error "NetworkOnMainThreadException"
+        // https://stackoverflow.com/a/9289190
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     /**
      * Add a new item to inventory (not just increase qty).
      * @param item
+     * @return "success" || "some error message"
      */
-    public void addItem(Item item) {
-        System.out.format("Adding item %s\n.", item.toString());
+    public String addItem(Item item)
+    {
+        JSONObject response = talkToApi("POST", item.toJsonString());
+        if (apiResponseError(response)) return apiResponseGetError(response);
+        else return "success";
     }
 
     /**
@@ -72,7 +84,7 @@ public class API {
 
 
     // requestType: "GET" || "POST" || "PUT" || "DELETE" / jsonParams ex: '{"id":"3001", "qty":"bye"...}'
-    // @returns a json-formatted string
+    // @returns a JSONObject
     // {"0":{"itemID":6666,"itemName":"hello","price":12.1,"quantity":10,"supplierID":50001}}
     // {"success":true}
     // {"error":"some error"}
@@ -116,11 +128,12 @@ public class API {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             response = in.readLine();
             in.close();
-            if (!response.startsWith("{")) throw new Exception(response);
+            if (!response.startsWith("{")) {
+                response = "{\"error\":" + "\"API: " + response + "\"}";
+            }
         }
         catch (Exception e) {
-            String errorJson = "{\"error\":" + "\"" + e + "\"}";
-            response = errorJson;
+            response = "{\"error\":" + "\"" + e + "\"}";
         }
 
         JSONObject output = null;
@@ -128,6 +141,27 @@ public class API {
         catch (Exception e) {}
 
         return output;
+    }
+
+    public Boolean apiResponseError(JSONObject jsonObj)
+    {
+        if (jsonObj.toString().startsWith("{\"error\"")) return true;
+        else return false;
+    }
+
+    public Boolean apiResponseSuccess(JSONObject jsonObj)
+    {
+        if (jsonObj.toString().startsWith("{\"success\"")) return true;
+        else return false;
+    }
+
+    public String apiResponseGetError(JSONObject jsonObj)
+    {
+        try {
+            return jsonObj.get("error").toString();
+        } catch(Exception e) {
+            return "";
+        }
     }
 
     // don't know what to call this function yet
