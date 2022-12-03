@@ -1,12 +1,16 @@
 package com.example.comp3504inventorysystem;
 
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Gravity;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.LinearLayout;
+
 import com.example.comp3504inventorysystem.databinding.ActivityListItemViewBinding;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -41,13 +45,75 @@ public class ListItemActivity extends DrawerBaseActivity {
 
         // Display
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.listItem_output);
+//        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.listItem_output);
+//
+//        for (Item item : matchedItems) {
+//            TextView textView = new TextView(this);
+//            textView.setText(item.toString());
+//            linearLayout.addView(textView);
+//        }
+
+        TableLayout tableview = findViewById(R.id.table_output);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10,5,10,5);
+
+
+        TableRow tbHeader = (TableRow)findViewById(R.id.table_header);
+        tbHeader.setGravity(Gravity.CENTER);
+        Typeface font = getResources().getFont(R.font.acme);
+
 
         for (Item item : matchedItems) {
-            TextView textView = new TextView(this);
-            textView.setText(item.toString());
-            linearLayout.addView(textView);
+
+            //Set variables to be used
+            TableRow tbr = new TableRow(this);
+            tbr.setGravity(Gravity.CENTER);
+            TextView idView = new TextView(this);
+            TextView nameView = new TextView(this);
+            TextView quantityView = new TextView(this);
+            TextView priceView = new TextView(this);
+            TextView supplyIdView = new TextView(this);
+
+            //Set margins for each textview
+            idView.setLayoutParams(params);
+            nameView.setLayoutParams(params);
+            quantityView.setLayoutParams(params);
+            priceView.setLayoutParams(params);
+            supplyIdView.setLayoutParams(params);
+
+            //Set the textview positioning
+            idView.setGravity(Gravity.CENTER);
+            nameView.setGravity(Gravity.CENTER);
+            quantityView.setGravity(Gravity.CENTER);
+            priceView.setGravity(Gravity.CENTER);
+            supplyIdView.setGravity(Gravity.CENTER);
+
+            //Set the textview's font face
+            idView.setTypeface(font);
+            nameView.setTypeface(font);
+            quantityView.setTypeface(font);
+            priceView.setTypeface(font);
+            supplyIdView.setTypeface(font);
+
+            //Pass data pulled from API to textview
+            idView.setText(String.valueOf(item.getId()));
+            nameView.setText(item.getName());
+            quantityView.setText(String.valueOf(item.getQuantity()));
+            priceView.setText(String.valueOf(item.getPrice()));
+            supplyIdView.setText(String.valueOf(item.getSupplierId()));
+
+            //Add textview to tablerow tbr
+            tbr.addView(idView);
+            tbr.addView(nameView);
+            tbr.addView(quantityView);
+            tbr.addView(priceView);
+            tbr.addView(supplyIdView);
+
+            //Add tablerow tbr to tablelayout tableview
+            tableview.addView(tbr);
+
         }
+
     }
 
     @Override

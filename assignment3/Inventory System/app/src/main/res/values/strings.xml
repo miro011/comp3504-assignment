@@ -51,6 +51,12 @@
 
     @listItem Activity
     <string name="listItem_title">List Item</string>
+    <string name="listItem_itemId">Item ID</string>
+    <string name="listItem_itemName">Item Name</string>
+    <string name="listItem_itemQty">Item Quantity</string>
+    <string name="listItem_itemPrice">Item Price</string>
+    <string name="listItem_itemSuppID">Item Supplier ID</string>
+
 
     @info Activity
     <string name="info_title">App Info</string>
