@@ -21,15 +21,15 @@
         android:id="@+id/addItem_textbox_itemID"
         android:layout_width="210dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="156dp"
         android:autofillHints="@string/addItem_autoHints_itemId"
         android:ems="10"
         android:hint="@string/addItem_hint_itemId"
         android:inputType="number"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textview_itemID"
         app:layout_constraintTop_toTopOf="parent" />
 
