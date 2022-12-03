@@ -35,6 +35,7 @@
     <string name="addItem_hint_quantity">Enter item quantity</string>
     <string name="addItem_hint_price">Enter item price</string>
     <string name="addItem_hint_supplierID">Enter supplier ID</string>
+    
     @autoHints
     <string name="addItem_autoHints_itemId">3000</string>
     <string name="addItem_autoHints_name">Willie Widgets</string>
