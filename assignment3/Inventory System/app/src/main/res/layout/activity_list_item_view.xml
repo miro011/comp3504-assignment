@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ListItemActivity">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/listItem_output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    </LinearLayout>
+
+
     <ImageView
         android:id="@+id/listItem_bottom_bar"
         style="@style/Widget.AppCompat.ImageButton"

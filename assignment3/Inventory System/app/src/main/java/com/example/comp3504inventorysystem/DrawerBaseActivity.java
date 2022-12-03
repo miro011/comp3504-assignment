@@ -22,6 +22,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+// for popup
+import android.widget.PopupWindow;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.widget.TextView;
+
+
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     API api;
@@ -92,6 +101,39 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         if (getSupportActionBar()!=null){
             getSupportActionBar().setTitle(titleString);
         }
+    }
+
+    // https://stackoverflow.com/a/50188704
+    public void showPopup(View view, String textToShow, String popupType) {
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView;
+        if (popupType == "success") popupView = inflater.inflate(R.layout.popup_success, null);
+        else if (popupType == "error") popupView = inflater.inflate(R.layout.popup_error, null);
+        else popupView = inflater.inflate(R.layout.popup_generic, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // change the text of the popup - https://stackoverflow.com/a/59544347
+        TextView popupTextview = popupView.findViewById(R.id.popup_text);
+        popupTextview.setText(textToShow);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 }
 
