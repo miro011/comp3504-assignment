@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -28,19 +29,19 @@ public class AddItemActivity extends DrawerBaseActivity {
         Button buttonOne = (Button) findViewById(R.id.addItem_submit);
         buttonOne.setOnClickListener(new HandleSubmit(this));
 
-        TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
+        EditText id = (EditText) findViewById(R.id.addItem_textbox_itemID);
         id.setOnFocusChangeListener(new HandleFocus());
 
-        TextView name = (TextView) findViewById(R.id.addItem_textbox_itemName);
+        EditText name = (EditText) findViewById(R.id.addItem_textbox_itemName);
         name.setOnFocusChangeListener(new HandleFocus());
 
-        TextView quantity = (TextView) findViewById(R.id.addItem_textbox_quantity);
+        EditText quantity = (EditText) findViewById(R.id.addItem_textbox_quantity);
         quantity.setOnFocusChangeListener(new HandleFocus());
 
-        TextView price = (TextView) findViewById(R.id.addItem_textbox_price);
+        EditText price = (EditText) findViewById(R.id.addItem_textbox_price);
         price.setOnFocusChangeListener(new HandleFocus());
 
-        TextView supplierId = (TextView) findViewById(R.id.addItem_textbox_supplierID);
+        EditText supplierId = (EditText) findViewById(R.id.addItem_textbox_supplierID);
         supplierId.setOnFocusChangeListener(new HandleFocus());
     }
 
@@ -65,11 +66,11 @@ public class AddItemActivity extends DrawerBaseActivity {
         }
 
         public void onClick(View view) {
-            TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
-            TextView name = (TextView) findViewById(R.id.addItem_textbox_itemName);
-            TextView quantity = (TextView) findViewById(R.id.addItem_textbox_quantity);
-            TextView price = (TextView) findViewById(R.id.addItem_textbox_price);
-            TextView supplierID = (TextView) findViewById(R.id.addItem_textbox_supplierID);
+            EditText id = (EditText) findViewById(R.id.addItem_textbox_itemID);
+            EditText name = (EditText) findViewById(R.id.addItem_textbox_itemName);
+            EditText quantity = (EditText) findViewById(R.id.addItem_textbox_quantity);
+            EditText price = (EditText) findViewById(R.id.addItem_textbox_price);
+            EditText supplierID = (EditText) findViewById(R.id.addItem_textbox_supplierID);
             Item item = new Item();
 
             try {
@@ -114,6 +115,13 @@ public class AddItemActivity extends DrawerBaseActivity {
             } else {
                 showPopup(activityAddItemViewBinding.getRoot(), "Item added!", "success");
             }
+
+            //Clear the form after submit
+            id.setText("");
+            name.setText("");
+            quantity.setText("");
+            price.setText("");
+            supplierID.setText("");
         }
     }
 

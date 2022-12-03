@@ -28,19 +28,15 @@ public class DashboardActivity extends DrawerBaseActivity {
 
     public void openAddItemActivity(){
         startActivity(new Intent(this, AddItemActivity.class));
-        overridePendingTransition(0,0);
     }
     public void openListItemActivity(){
         startActivity(new Intent(this, ListItemActivity.class));
-        overridePendingTransition(0,0);
     }
     public void openSearchItemActivity(){
         startActivity(new Intent(this, SearchItemActivity.class));
-        overridePendingTransition(0,0);
     }
     public void openInfoActivity(){
         startActivity(new Intent(this, InfoViewActivity.class));
-        overridePendingTransition(0,0);
     }
 
     @Override
