@@ -95,6 +95,7 @@ public class ListItemActivity extends DrawerBaseActivity {
             priceView.setTypeface(font);
             supplyIdView.setTypeface(font);
 
+
             //Pass data pulled from API to textview
             idView.setText(String.valueOf(item.getId()));
             nameView.setText(item.getName());

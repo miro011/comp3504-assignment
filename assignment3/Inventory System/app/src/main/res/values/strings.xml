@@ -52,11 +52,11 @@
 
     @listItem Activity
     <string name="listItem_title">List Item</string>
-    <string name="listItem_itemId">Item ID</string>
-    <string name="listItem_itemName">Item Name</string>
-    <string name="listItem_itemQty">Item Quantity</string>
-    <string name="listItem_itemPrice">Item Price</string>
-    <string name="listItem_itemSuppID">Item Supplier ID</string>
+    <string name="listItem_itemId">ID</string>
+    <string name="listItem_itemName">Name</string>
+    <string name="listItem_itemQty">Quantity</string>
+    <string name="listItem_itemPrice">Price</string>
+    <string name="listItem_itemSuppID">Supplier</string>
 
 
     @info Activity
