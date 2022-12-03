@@ -5,14 +5,14 @@ The application submitted when run will load the home page with 4 icons and a na
 
 The navigation drawer has the 4 screens below as well as an exit button to exit the app.
  
-Add Item
+* Add Item
 	- This screen will allow you to add a new item to the inventory system. 
-List Item
+* List Item
 	- This screen will show all the items found in the database in tabular form
 		with the item ID, item name, item quantity, item price and the supplier id. 
-Search Item
+* Search Item
 	- This screen will allow you to search for a specific item using either the item ID or the item name. 
 		the way we implemented this screen is after you click the search button it will load the List item screen
 		and show only the item you have search for. 
-App Info
+* App Info
 	- This screen contains the team member names for Group 4
