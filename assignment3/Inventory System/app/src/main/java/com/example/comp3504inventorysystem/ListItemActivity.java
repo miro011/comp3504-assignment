@@ -53,7 +53,7 @@ public class ListItemActivity extends DrawerBaseActivity {
 //            linearLayout.addView(textView);
 //        }
 
-        TableLayout linearLayout = findViewById(R.id.table_output);
+        TableLayout tableview = findViewById(R.id.table_output);
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(10,5,10,5);
 
@@ -65,6 +65,7 @@ public class ListItemActivity extends DrawerBaseActivity {
 
         for (Item item : matchedItems) {
 
+            //Set variables to be used
             TableRow tbr = new TableRow(this);
             tbr.setGravity(Gravity.CENTER);
             TextView idView = new TextView(this);
@@ -73,38 +74,43 @@ public class ListItemActivity extends DrawerBaseActivity {
             TextView priceView = new TextView(this);
             TextView supplyIdView = new TextView(this);
 
+            //Set margins for each textview
             idView.setLayoutParams(params);
             nameView.setLayoutParams(params);
             quantityView.setLayoutParams(params);
             priceView.setLayoutParams(params);
             supplyIdView.setLayoutParams(params);
 
+            //Set the textview positioning
             idView.setGravity(Gravity.CENTER | Gravity.CENTER);
             nameView.setGravity(Gravity.CENTER | Gravity.CENTER);
             quantityView.setGravity(Gravity.CENTER | Gravity.CENTER);
             priceView.setGravity(Gravity.CENTER | Gravity.CENTER);
             supplyIdView.setGravity(Gravity.CENTER | Gravity.CENTER);
 
+            //Set the textview's font face
             idView.setTypeface(font);
             nameView.setTypeface(font);
             quantityView.setTypeface(font);
             priceView.setTypeface(font);
             supplyIdView.setTypeface(font);
 
-
-
+            //Pass data pulled from API to textview
             idView.setText(String.valueOf(item.getId()));
             nameView.setText(item.getName());
             quantityView.setText(String.valueOf(item.getQuantity()));
             priceView.setText(String.valueOf(item.getPrice()));
             supplyIdView.setText(String.valueOf(item.getSupplierId()));
+
+            //Add textview to tablerow tbr
             tbr.addView(idView);
             tbr.addView(nameView);
             tbr.addView(quantityView);
             tbr.addView(priceView);
             tbr.addView(supplyIdView);
 
-            linearLayout.addView(tbr);
+            //Add tablerow tbr to tablelayout tableview
+            tableview.addView(tbr);
 
         }
 
