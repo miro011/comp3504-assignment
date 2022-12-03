@@ -82,11 +82,11 @@ public class ListItemActivity extends DrawerBaseActivity {
             supplyIdView.setLayoutParams(params);
 
             //Set the textview positioning
-            idView.setGravity(Gravity.CENTER | Gravity.CENTER);
-            nameView.setGravity(Gravity.CENTER | Gravity.CENTER);
-            quantityView.setGravity(Gravity.CENTER | Gravity.CENTER);
-            priceView.setGravity(Gravity.CENTER | Gravity.CENTER);
-            supplyIdView.setGravity(Gravity.CENTER | Gravity.CENTER);
+            idView.setGravity(Gravity.CENTER);
+            nameView.setGravity(Gravity.CENTER);
+            quantityView.setGravity(Gravity.CENTER);
+            priceView.setGravity(Gravity.CENTER);
+            supplyIdView.setGravity(Gravity.CENTER);
 
             //Set the textview's font face
             idView.setTypeface(font);

@@ -18,7 +18,8 @@
         android:layout_height="fill_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".EditEntry">
+        tools:context=".EditEntry"
+        android:layout_marginBottom ="55dp">
 
         <TableLayout
             android:id="@+id/table_output"
