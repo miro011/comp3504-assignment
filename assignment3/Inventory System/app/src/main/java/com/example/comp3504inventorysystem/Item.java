@@ -26,7 +26,7 @@ public class Item {
         this.supplierId = supplierId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -55,7 +55,7 @@ public class Item {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -68,7 +68,7 @@ public class Item {
         this.quantity = newQty;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
@@ -86,7 +86,7 @@ public class Item {
         this.price = newPrice;
     }
 
-    public int getSupplierId() {
+    public Integer getSupplierId() {
         return this.supplierId;
     }
 

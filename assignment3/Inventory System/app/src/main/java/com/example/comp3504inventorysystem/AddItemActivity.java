@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.comp3504inventorysystem.databinding.ActivityAddItemViewBinding;
 
+import org.json.JSONObject;
+
 public class AddItemActivity extends DrawerBaseActivity {
     private long backClickTime;
     ActivityAddItemViewBinding activityAddItemViewBinding;
@@ -106,11 +108,11 @@ public class AddItemActivity extends DrawerBaseActivity {
                 return;
             }
 
-            String response = parentClass.api.addItem(item);
-            if (response == "success") {
-                showPopup(activityAddItemViewBinding.getRoot(), "Item added!", "success");
+            JSONObject response = api.talkToApi("POST", item.toJsonString());
+            if (api.apiResponseError(response)) {
+                showPopup(activityAddItemViewBinding.getRoot(), api.apiResponseGetError(response), "error");
             } else {
-                showPopup(activityAddItemViewBinding.getRoot(), response.toString(), "error");
+                showPopup(activityAddItemViewBinding.getRoot(), "Item added!", "success");
             }
         }
     }

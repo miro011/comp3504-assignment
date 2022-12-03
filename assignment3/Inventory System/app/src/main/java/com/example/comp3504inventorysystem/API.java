@@ -23,69 +23,10 @@ public class API {
         StrictMode.setThreadPolicy(policy);
     }
 
-    /**
-     * Add a new item to inventory (not just increase qty).
-     * @param item
-     * @return "success" || "some error message"
-     */
-    public String addItem(Item item)
-    {
-        JSONObject response = talkToApi("POST", item.toJsonString());
-        if (apiResponseError(response)) return apiResponseGetError(response);
-        else return "success";
-    }
-
-    /**
-     * Remove an item from inventory entirely (not just zero qty).
-     * @param id
-     */
-    public void removeItem(int id) {
-        System.out.format("Removing item %d\n", id);
-    }
-
-    /**
-     * Search for an item by the ID.
-     * @param id
-     * @return A list of matching results
-     */
-    public ArrayList<Item> searchItem(int id) {
-        System.out.format("Searching items by id=%d", id);
-        return new ArrayList<Item>();
-    }
-
-    /**
-     * Search for an item by a regex matched against item names.
-     * @param nameRegex
-     * @return A list of matching results
-     */
-    public ArrayList<Item> searchItem(String nameRegex) {
-        System.out.format("Searching items by nameRegex like %s", nameRegex);
-        return new ArrayList<Item>();
-    }
-
-    /**
-     * Get all items in inventory and their information.
-     * @return A list of all items currently in inventory
-     */
-    public ArrayList<Item> getItems() {
-        System.out.println("Getting all items");
-        return new ArrayList<Item>();
-    }
-
-    /**
-     * Modifies the contents of the item in inventory specified by newItem.id.
-     * Overwrites the entire item, so if you don't want something to change, set it to the current
-     * value.
-     * @param newItem ID is the item to overwrite, all other fields are the new values.
-     */
-    public void modifyItem(Item newItem) {
-        System.out.format("Modifying item %d\n", newItem);
-    }
-
 
     // requestType: "GET" || "POST" || "PUT" || "DELETE" / jsonParams ex: '{"id":"3001", "qty":"bye"...}'
     // @returns a JSONObject
-    // {"0":{"itemID":6666,"itemName":"hello","price":12.1,"quantity":10,"supplierID":50001}}
+    // {"0":{"itemID":6666,"itemName":"hello","price":12.1,"quantity":10,"supplierID":50001}} || {}
     // {"success":true}
     // {"error":"some error"}
     // testing
@@ -99,13 +40,13 @@ public class API {
 
     public JSONObject talkToApi(String requestType, String jsonParams)
     {
-        String response;
+        String response = "";
         HttpURLConnection connection = null;
         try {
             // API URL + GET request
             String apiUrl = "http://34.105.39.147/items/";
             //String apiUrl = "http://127.0.0.1:7777/items/";
-            if (requestType == "GET") {
+            if (requestType.equals("GET")) {
                 try {apiUrl += "?json=" + URLEncoder.encode(jsonParams, "UTF-8");}
                 catch(Exception e) {}
             }
@@ -114,22 +55,37 @@ public class API {
             URL url = new URL(apiUrl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(requestType);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
 
             // Set body with non-GET requests
-            if (requestType != "GET") {
+            if (!requestType.equals("GET")) {
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
                 OutputStream os = connection.getOutputStream();
                 os.write(jsonParams.getBytes("UTF-8"));
                 os.close();
             }
 
-            // Get response
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            response = in.readLine();
-            in.close();
-            if (!response.startsWith("{")) {
-                response = "{\"error\":" + "\"API: " + response + "\"}";
+            // Response status code
+            int status = connection.getResponseCode();
+            if (status == 400) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                String line;
+                while ((line = in.readLine()) != null) {
+                    if (!line.startsWith("<p>")) continue;
+                    // remove <p> and </p>
+                    line = line.substring(3);
+                    line = line.substring(0, line.length() - 4);
+                    response = "{\"error\":" + "\"API 400: " + line + "\"}";
+                    break;
+                }
+                in.close();
+            } else {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                response = in.readLine();
+                in.close();
+                if (!response.startsWith("{")) {
+                    response = "{\"error\":" + "\"API: " + response + "\"}";
+                }
             }
         }
         catch (Exception e) {
@@ -155,6 +111,12 @@ public class API {
         else return false;
     }
 
+    public Boolean apiResponseEmpty(JSONObject jsonObj)
+    {
+        if (jsonObj.toString().equals("{}")) return true;
+        else return false;
+    }
+
     public String apiResponseGetError(JSONObject jsonObj)
     {
         try {
@@ -164,28 +126,37 @@ public class API {
         }
     }
 
-    // don't know what to call this function yet
-    // it takes the output of talktoapi and loops through it
-    public void itterateJson(JSONObject jsonObj)
+    public ArrayList<Item> getItemsListFromApiResponse(JSONObject jsonObj, String jsonStr)
     {
-        /*
-        Iterator<String> keys = jsonObj.keys();
+        ArrayList<Item> output = new ArrayList<Item>();
 
-        while(keys.hasNext()) {
-            String key = keys.next();
-            //System.out.println(key);
-
-            // After having retrieved item details
-            if (jsonObj.get(key) instanceof JSONObject) {
-                // do something
-            }
-            // {"success":true} & {"error":"some error"}
-            else {
-                // do something
+        if (jsonStr != null) {
+            try {
+                jsonObj = new JSONObject(jsonStr);
+            } catch(Exception e) {
+                return output;
             }
         }
-        System.out.println(jsonObj.toString());
-        */
-    }
 
+        Iterator<String> keys = jsonObj.keys();
+        while(keys.hasNext()) {
+            String key = keys.next();
+            try {
+                String singleItemJsonStr = jsonObj.get(key).toString();
+                JSONObject singleItemJsonObj = new JSONObject(singleItemJsonStr);
+
+                int id = Integer.parseInt(singleItemJsonObj.get("itemID").toString());
+                String name = singleItemJsonObj.get("itemName").toString();
+                int quantity = Integer.parseInt(singleItemJsonObj.get("quantity").toString());
+                float price = Float.parseFloat(singleItemJsonObj.get("price").toString());
+                int supplierId = Integer.parseInt(singleItemJsonObj.get("supplierID").toString());
+
+                output.add(new Item(id, name, quantity, price, supplierId));
+            } catch(Exception e) {
+                continue;
+            }
+        }
+
+        return output;
+    }
 }
