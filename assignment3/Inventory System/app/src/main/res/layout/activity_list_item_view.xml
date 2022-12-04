@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ListItemActivity">
 
+
     <!--    <LinearLayout-->
     <!--        android:id="@+id/listItem_output"-->
     <!--        android:layout_width="match_parent"-->
@@ -13,24 +14,26 @@
     <!--        android:orientation="vertical">-->
     <!--    </LinearLayout>-->
 
-    <ScrollView
+ <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="55dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".EditEntry">
+        tools:context=".EditEntry"
+        android:layout_marginBottom ="55dp">
 
         <TableLayout
             android:id="@+id/table_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:stretchColumns="1"
+            android:shrinkColumns="1">
 
             <TableRow
                 android:id="@+id/table_header"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="UselessParent">
@@ -113,7 +116,6 @@
         </TableLayout>
 
     </ScrollView>
-
     <ImageView
         android:id="@+id/listItem_bottom_bar"
         style="@style/Widget.AppCompat.ImageButton"

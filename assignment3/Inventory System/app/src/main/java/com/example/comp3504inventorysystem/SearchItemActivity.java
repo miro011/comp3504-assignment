@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -56,8 +57,8 @@ public class SearchItemActivity extends DrawerBaseActivity {
     {
         return new View.OnClickListener() {
             public void onClick(View view) {
-                TextView id = (TextView) findViewById(R.id.addItem_textbox_itemID);
-                TextView name = (TextView) findViewById(R.id.addItem_textbox_itemName);
+                EditText id = (EditText) findViewById(R.id.addItem_textbox_itemID);
+                EditText name = (EditText) findViewById(R.id.addItem_textbox_itemName);
                 Item item = new Item();
 
                 if (!id.getText().toString().equals("") && !name.getText().toString().equals("")) {
@@ -90,6 +91,9 @@ public class SearchItemActivity extends DrawerBaseActivity {
                     i.putExtra("jsondata", response.toString());
                     startActivity(i);
                 }
+                //Clear the form after submit
+                id.setText("");
+                name.setText("");
             }
         };
     }

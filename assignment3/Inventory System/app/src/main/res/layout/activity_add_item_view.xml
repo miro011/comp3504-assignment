@@ -22,7 +22,7 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="152dp"
         android:autofillHints="@string/addItem_autoHints_itemId"
         android:ems="10"
         android:hint="@string/addItem_hint_itemId"

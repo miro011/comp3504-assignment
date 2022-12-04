@@ -9,9 +9,15 @@ import static com.example.comp3504inventorysystem.R.id.nav_searchItem;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,14 +27,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-
-// for popup
-import android.widget.PopupWindow;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.widget.TextView;
 
 
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -108,8 +106,8 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView;
-        if (popupType == "success") popupView = inflater.inflate(R.layout.popup_success, null);
-        else if (popupType == "error") popupView = inflater.inflate(R.layout.popup_error, null);
+        if (popupType.equals("success")) popupView = inflater.inflate(R.layout.popup_success, null);
+        else if (popupType.equals("error")) popupView = inflater.inflate(R.layout.popup_error, null);
         else popupView = inflater.inflate(R.layout.popup_generic, null);
 
         // create the popup window
