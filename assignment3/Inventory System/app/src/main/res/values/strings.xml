@@ -30,18 +30,11 @@
     <string name="addItem_title_supplierID">Supplier ID:</string>
 
     @Hints
-    <string name="addItem_hint_itemId">Enter item ID</string>
-    <string name="addItem_hint_name">Enter item name</string>
-    <string name="addItem_hint_quantity">Enter item quantity</string>
-    <string name="addItem_hint_price">Enter item price</string>
-    <string name="addItem_hint_supplierID">Enter supplier ID</string>
-    
-    @autoHints
-    <string name="addItem_autoHints_itemId">3000</string>
-    <string name="addItem_autoHints_name">Willie Widgets</string>
-    <string name="addItem_autoHints_quantity">10</string>
-    <string name="addItem_autoHints_price">14.50</string>
-    <string name="addItem_autoHints_supplierID">50003</string>
+    <string name="addItem_hint_itemId">Item ID</string>
+    <string name="addItem_hint_name">Item Name</string>
+    <string name="addItem_hint_quantity">Item Quantity</string>
+    <string name="addItem_hint_price">Item Price</string>
+    <string name="addItem_hint_supplierID">Supplier ID</string>
 
     @buttons
     <string name="addItem_submit_button">Submit</string>
