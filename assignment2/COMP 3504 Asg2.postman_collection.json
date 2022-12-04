@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "1a4f0272-4457-404c-ae5d-a74b73ecd6d7",
+		"name": "COMP 3504 Asg2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24239086"
+	},
+	"item": [
+		{
+			"name": "Get Help",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure help text has things in it\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}",
+					"host": [
+						"{{API URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure at least one item is present\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(pm.response.json().length>0);",
+							"    pm.expect(pm.response.json()).to.have.property('0');",
+							"});",
+							"",
+							"pm.test('Ensure item has an ID', function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemID');",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a Name\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemName');",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a price\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('price');",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a quantity\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('quantity');",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a supplierID\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('supplierID');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}/items",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"{{New Item ID}}\",\n    \"name\":\"{{New Item Name}}\",\n    \"qty\":\"199\",\n    \"price\":\"19.99\",\n    \"sid\":\"50015\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API URL}}/items",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure an item is returned\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(pm.response.json().length>0);",
+							"    // This can be a problem with either get by id or create item.",
+							"});",
+							"",
+							"pm.test('Ensure item has the correct ID', function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemID');",
+							"    pm.expect(pm.response.json()[0]['itemID']).to.equal(991);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a Name\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemName');",
+							"    pm.expect(pm.response.json()[0]['itemName']).to.equal(pm.variables.get(\"New Item Name\"));",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a price\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('price');",
+							"    pm.expect(pm.response.json()[0]['price']).to.equal(19.99);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a quantity\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('quantity');",
+							"    pm.expect(pm.response.json()[0]['quantity']).to.equal(199);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a supplierID\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('supplierID');",
+							"    pm.expect(pm.response.json()[0]['supplierID']).to.equal(50015);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}/items/?json=%7B%22id%22%3A%22{{New Item ID}}%22%7D",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items",
+						""
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "%7B%22id%22%3A%22{{New Item ID}}%22%7D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure an item is returned\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(pm.response.json().length>0);",
+							"    // This can be a problem with either get by id or create item.",
+							"});",
+							"",
+							"pm.test('Ensure item has the correct ID', function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemID');",
+							"    pm.expect(pm.response.json()[0]['itemID']).to.equal(991);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a Name\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemName');",
+							"    pm.expect(pm.response.json()[0]['itemName']).to.equal(pm.variables.get(\"New Item Name\"));",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a price\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('price');",
+							"    pm.expect(pm.response.json()[0]['price']).to.equal(19.99);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a quantity\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('quantity');",
+							"    pm.expect(pm.response.json()[0]['quantity']).to.equal(199);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a supplierID\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('supplierID');",
+							"    pm.expect(pm.response.json()[0]['supplierID']).to.equal(50015);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}/items/?json=%7B%22name%22%3A%22{{New Item Name}}%22%7D",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items",
+						""
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "%7B%22name%22%3A%22{{New Item Name}}%22%7D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Qty of Item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{New Item ID}}\",\n    \"qty\": \"10000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API URL}}/items",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item by ID, Updated Qty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure an item is returned\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(pm.response.json().length>0);",
+							"    // This can be a problem with either get by id or create item.",
+							"});",
+							"",
+							"pm.test('Ensure item has the correct ID', function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemID');",
+							"    pm.expect(pm.response.json()[0]['itemID']).to.equal(991);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a Name\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemName');",
+							"    pm.expect(pm.response.json()[0]['itemName']).to.equal(pm.variables.get(\"New Item Name\"));",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a price\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('price');",
+							"    pm.expect(pm.response.json()[0]['price']).to.equal(19.99);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a quantity\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('quantity');",
+							"    pm.expect(pm.response.json()[0]['quantity']).to.equal(10000);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a supplierID\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('supplierID');",
+							"    pm.expect(pm.response.json()[0]['supplierID']).to.equal(50015);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}/items/?json=%7B%22id%22%3A%22{{New Item ID}}%22%7D",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items",
+						""
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "%7B%22id%22%3A%22{{New Item ID}}%22%7D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{New Item ID}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API URL}}/items",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item by ID No Return",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ensure an item is returned\", function() {",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(pm.response.json().length>0);",
+							"    // This can be a problem with either get by id or create item.",
+							"});",
+							"",
+							"pm.test('Ensure item has the correct ID', function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemID');",
+							"    pm.expect(pm.response.json()[0]['itemID']).to.equal(991);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a Name\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('itemName');",
+							"    pm.expect(pm.response.json()[0]['itemName']).to.equal(pm.variables.get(\"New Item Name\"));",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a price\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('price');",
+							"    pm.expect(pm.response.json()[0]['price']).to.equal(19.99);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a quantity\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('quantity');",
+							"    pm.expect(pm.response.json()[0]['quantity']).to.equal(199);",
+							"});",
+							"",
+							"pm.test(\"Ensure item has a supplierID\", function() {",
+							"    pm.expect(pm.response.json()[0]).to.have.property('supplierID');",
+							"    pm.expect(pm.response.json()[0]['supplierID']).to.equal(50015);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API URL}}/items/?json=%7B%22id%22%3A%22{{New Item ID}}%22%7D",
+					"host": [
+						"{{API URL}}"
+					],
+					"path": [
+						"items",
+						""
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "%7B%22id%22%3A%22{{New Item ID}}%22%7D"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "API URL",
+			"value": "34.105.39.147"
+		},
+		{
+			"key": "New Item ID",
+			"value": "991"
+		},
+		{
+			"key": "New Item Name",
+			"value": "NewItem"
+		}
+	]
+}

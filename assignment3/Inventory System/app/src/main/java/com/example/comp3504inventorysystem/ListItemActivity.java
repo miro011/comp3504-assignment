@@ -1,11 +1,9 @@
 package com.example.comp3504inventorysystem;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -70,12 +68,17 @@ public class ListItemActivity extends DrawerBaseActivity {
 
             //Set variables to be used
             TableRow tbr = new TableRow(this);
-            tbr.setGravity(Gravity.CENTER);
+//            tbr.setGravity(Gravity.CENTER);
             TextView idView = new TextView(this);
+            idView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView nameView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             TextView quantityView = new TextView(this);
+            quantityView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView priceView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView supplyIdView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
             //Set margins for each textview
             idView.setLayoutParams(params);
@@ -116,8 +119,6 @@ public class ListItemActivity extends DrawerBaseActivity {
             //Add tablerow tbr to tablelayout tableview
             tableview.addView(tbr);
 
-            nameView.setOnClickListener(btnClickHandler(nameView));
-
         }
 
     }
@@ -126,36 +127,4 @@ public class ListItemActivity extends DrawerBaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
-//Returns only single item when item is clicked name is clicked on
-    public View.OnClickListener btnClickHandler(TextView nameView)
-    {
-
-        return new View.OnClickListener() {
-            public void onClick(View view) {
-
-                System.out.println(nameView.getText().toString());
-                Item item = new Item();
-
-                item.setName(nameView.getText().toString());
-
-                JSONObject response = api.talkToApi("GET", item.toJsonString());
-                if (api.apiResponseEmpty(response)) {
-                    System.out.println("empty api response");
-                } else if (api.apiResponseError(response)) {
-                    System.out.println("api response error");
-                } else {
-                    Intent i = new Intent(ListItemActivity.this, ListItemActivity.class);
-                    i.putExtra("jsondata", response.toString());
-                    startActivity(i);
-                }
-            }
-        };
-    }
-
-
-
-
 }
-

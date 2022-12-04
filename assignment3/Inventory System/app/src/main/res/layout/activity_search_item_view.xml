@@ -6,70 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".SearchItemActivity">
 
-    <TextView
-        android:id="@+id/textview_itemID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="161dp"
-        android:text="@string/addItem_title_itemId"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/addItem_textbox_itemID"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
-        android:autofillHints="@string/addItem_autoHints_itemId"
-        android:ems="10"
-        android:hint="@string/addItem_hint_itemId"
-        android:inputType="number"
-        android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textview_itemID"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textview_itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/addItem_title_name"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_itemID" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textview_itemID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/addItem_title_itemId">
 
-    <EditText
-        android:id="@+id/addItem_textbox_itemName"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:autofillHints="@string/addItem_autoHints_name"
-        android:ems="10"
-        android:hint="@string/addItem_hint_name"
-        android:inputType="textPersonName"
-        android:textColorHint="#757575"
-        app:layout_constraintStart_toEndOf="@+id/textview_itemName"
-        app:layout_constraintTop_toBottomOf="@+id/addItem_textbox_itemID" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addItem_textbox_itemID"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/addItem_hint_itemId"
+                    android:inputType="number"
+                    android:textColorHint="#616161" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/searchItem_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="60dp"
-        android:backgroundTint="#A1A1A1"
-        android:checkable="true"
-        android:text="@string/searchItem_button"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItem_textbox_itemName" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textview_itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/addItem_title_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addItem_textbox_itemName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/addItem_hint_name"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#616161" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/searchItem_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/searchItem_button" />
+        </LinearLayout>
+    </ScrollView>
 
     <ImageView
         android:id="@+id/searchItem_bottom_bar"
