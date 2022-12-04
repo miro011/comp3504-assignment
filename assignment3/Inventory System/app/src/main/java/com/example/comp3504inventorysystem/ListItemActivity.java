@@ -1,8 +1,11 @@
 package com.example.comp3504inventorysystem;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -113,6 +116,8 @@ public class ListItemActivity extends DrawerBaseActivity {
             //Add tablerow tbr to tablelayout tableview
             tableview.addView(tbr);
 
+            nameView.setOnClickListener(btnClickHandler(nameView));
+
         }
 
     }
@@ -121,4 +126,36 @@ public class ListItemActivity extends DrawerBaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
+//Returns only single item when item is clicked name is clicked on
+    public View.OnClickListener btnClickHandler(TextView nameView)
+    {
+
+        return new View.OnClickListener() {
+            public void onClick(View view) {
+
+                System.out.println(nameView.getText().toString());
+                Item item = new Item();
+
+                item.setName(nameView.getText().toString());
+
+                JSONObject response = api.talkToApi("GET", item.toJsonString());
+                if (api.apiResponseEmpty(response)) {
+                    System.out.println("empty api response");
+                } else if (api.apiResponseError(response)) {
+                    System.out.println("api response error");
+                } else {
+                    Intent i = new Intent(ListItemActivity.this, ListItemActivity.class);
+                    i.putExtra("jsondata", response.toString());
+                    startActivity(i);
+                }
+            }
+        };
+    }
+
+
+
+
 }
+
