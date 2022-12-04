@@ -3,6 +3,7 @@ package com.example.comp3504inventorysystem;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -67,12 +68,17 @@ public class ListItemActivity extends DrawerBaseActivity {
 
             //Set variables to be used
             TableRow tbr = new TableRow(this);
-            tbr.setGravity(Gravity.CENTER);
+//            tbr.setGravity(Gravity.CENTER);
             TextView idView = new TextView(this);
+            idView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView nameView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             TextView quantityView = new TextView(this);
+            quantityView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView priceView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             TextView supplyIdView = new TextView(this);
+            nameView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
             //Set margins for each textview
             idView.setLayoutParams(params);

@@ -6,30 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ListItemActivity">
 
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/listItem_output"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="vertical">-->
-    <!--    </LinearLayout>-->
-
- <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/listItem_bottom_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".EditEntry"
-        android:layout_marginBottom ="55dp">
+        tools:context=".EditEntry">
 
         <TableLayout
             android:id="@+id/table_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:shrinkColumns="1"
             android:stretchColumns="1"
-            android:shrinkColumns="1">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TableRow
                 android:id="@+id/table_header"
@@ -44,14 +37,11 @@
                     android:layout_height="wrap_content"
                     android:background="#000000"
                     android:fontFamily="@font/acme"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/listItem_itemId"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="@string/listItem_itemId"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:padding="4dp"/>
 
                 <TextView
                     android:id="@+id/itemName"
@@ -59,14 +49,11 @@
                     android:layout_height="wrap_content"
                     android:background="#000000"
                     android:fontFamily="@font/acme"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/listItem_itemName"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="@string/listItem_itemName"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:padding="4dp"/>
 
                 <TextView
                     android:id="@+id/itemQuantity"
@@ -74,14 +61,11 @@
                     android:layout_height="wrap_content"
                     android:background="#000000"
                     android:fontFamily="@font/acme"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/listItem_itemQty"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="@string/listItem_itemQty"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:padding="4dp"/>
 
                 <TextView
                     android:id="@+id/itemPrice"
@@ -89,14 +73,11 @@
                     android:layout_height="wrap_content"
                     android:background="#000000"
                     android:fontFamily="@font/acme"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/listItem_itemPrice"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="@string/listItem_itemPrice"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:padding="4dp"/>
 
                 <TextView
                     android:id="@+id/itemSupplyID"
@@ -104,18 +85,16 @@
                     android:layout_height="wrap_content"
                     android:background="#000000"
                     android:fontFamily="@font/acme"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/listItem_itemSuppID"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="@string/listItem_itemSuppID"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:padding="4dp"/>
             </TableRow>
         </TableLayout>
 
     </ScrollView>
+
     <ImageView
         android:id="@+id/listItem_bottom_bar"
         style="@style/Widget.AppCompat.ImageButton"
