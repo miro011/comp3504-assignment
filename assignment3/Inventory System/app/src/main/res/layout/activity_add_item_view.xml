@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/addItem_title_itemId">
+                android:text="@string/addItem_title_itemId"
+                android:textColorHint="#616161">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addItem_textbox_itemID"
@@ -29,8 +30,7 @@
                     android:layout_height="48dp"
                     android:hint="@string/addItem_hint_itemId"
                     android:inputType="number"
-                    android:maxLines="1"
-                    android:textColorHint="#616161" />
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -38,16 +38,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/addItem_title_quantity">
+                android:text="@string/addItem_title_quantity"
+                android:textColorHint="#616161">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addItem_textbox_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:autofillHints="@string/addItem_autoHints_quantity"
                     android:hint="@string/addItem_hint_quantity"
                     android:inputType="number"
-                    android:textColorHint="#616161" />
+                    android:textColorHint="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -56,16 +56,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/addItem_title_name"
-                android:textSize="20sp">
+                android:textSize="20sp"
+                android:textColorHint="#616161">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addItem_textbox_itemName"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:autofillHints="@string/addItem_autoHints_name"
                     android:hint="@string/addItem_hint_name"
-                    android:inputType="textPersonName"
-                    android:textColorHint="#616161" />
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -74,16 +73,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/addItem_title_price"
-                android:textSize="20sp">
+                android:textColorHint="#616161">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addItem_textbox_price"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:autofillHints="@string/addItem_autoHints_price"
                     android:hint="@string/addItem_hint_price"
-                    android:inputType="numberDecimal"
-                    android:textColorHint="#616161" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,16 +89,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/addItem_title_supplierID"
-                android:textSize="20sp">
+                android:textColorHint="#616161">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addItem_textbox_supplierID"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:autofillHints="@string/addItem_autoHints_supplierID"
                     android:hint="@string/addItem_hint_supplierID"
-                    android:inputType="number"
-                    android:textColorHint="#616161" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -109,10 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="#A1A1A1"
-                android:clickable="true"
-                android:text="@string/addItem_submit_button"
-                android:textColor="#4A148C" />
+                android:text="@string/addItem_submit_button"/>
         </LinearLayout>
     </ScrollView>
 
