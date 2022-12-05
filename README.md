@@ -1,6 +1,11 @@
-# Asg1-Comp3504
-Assignment 3 submission is found in the folder "/assignment3/Inventory System". 
+# Assignment 3
+## Submission Info
+- Submission project is found in the folder "/assignment3/Inventory System".
+- A compiled APK can be found at "/assignment3/Submission Build.apk".
+- Automated testing for the API done during assignment 3 is under "/assignment2/COMP 3504 Asg2.postman_collection.json".
+- Test results for automated and manual tests were recorded in the [Sheets document](https://docs.google.com/spreadsheets/d/10G9Q92WTkX0CEBmEqS0qk4HcmzQprwMbjdUsBzEqOqE/edit#gid=0) under two sheets.
 
+## App Info
 The application submitted when run will load the home page with 4 icons and a navigation drawer.
 
 The navigation drawer has the 4 screens below as well as an exit button to exit the app.
