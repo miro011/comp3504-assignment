@@ -63,6 +63,7 @@ public class SearchItemActivity extends DrawerBaseActivity {
 
                 if (!id.getText().toString().equals("") && !name.getText().toString().equals("")) {
                     showPopup(activitySearchItemViewBinding.getRoot(), "can only search for one thing", "error");
+                    return;
                 } else if (!id.getText().toString().equals("")) {
                     try {
                         item.setIdStr(id.getText().toString());
